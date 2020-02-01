@@ -1,0 +1,59 @@
+ html {
+	height: 100%;
+	box-sizing: border-box;
+  }
+  
+  *,
+  *:before,
+  *:after {
+	box-sizing: inherit;
+  }
+  
+  body {
+	 
+	  position: relative;
+	  margin: 0;
+	  padding-bottom: 6rem;
+	  min-height: 100%;
+	  font-family:  Calibri;
+	  
+  }
+
+  footer{
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 25px;
+    background-color: #1761A0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.849);
+
+    
+}
+
+@media(min-height:1000px){
+    footer{
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 1rem;
+      text-align: center;
+      
+    }
+
+  }
+
+  @media(max-width: 700px){
+    footer{
+    padding: 25px;   
+		position: absolute;
+    display: block;
+    font-size: 16px;
+		text-align: center;
+		line-height: 1;
+		width: 100%;
+	}
+}
