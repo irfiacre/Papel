@@ -1,0 +1,144 @@
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body{
+    opacity: 1;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  nav{
+    height: 12vh;
+  }
+  .nav-links{
+    display: flex;
+    list-style: none;
+    width: 50%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: auto;
+
+  }
+  .nav-links a:hover{
+    border-bottom: 1px dotted #1761A0;
+  }
+
+  .nav-links a {
+    color: #1761A0;;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  #click{
+    cursor: pointer;
+  }
+
+  .logo img{
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    object-fit: cover;
+    color: white;
+    cursor: pointer;
+    align-items: center;
+    margin: -2px 30px;
+    font-size: 25px;
+    height: 15vh;
+  }
+
+  #userProfile{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+  }
+  #userProfile:hover{
+    border: 4px solid white;
+  }
+
+@media screen and (max-width:700px){
+  nav{
+    position: relative;
+  }
+  .logo{
+    font-size: 18px;
+    margin-left: 5px;
+  }
+  .nav-links{
+    position: absolute;
+    background-color: white;
+    height: 45vh;
+    width: 100%;
+    flex-direction: column;
+    clip-path: circle(100px at 90% -40%);
+    -webkit-clip-path:circle(100px at 90% -40%);
+    transition: all 1s ease-out;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nav-links.open{
+    clip-path: circle(1100px at 90% -10%);
+    -webkit-clip-path:circle(1100px at 90% -10%);
+    pointer-events: all;
+  }
+
+  .line{
+    width: 30px;
+    height: 3px;
+    background: #1761A0;;
+    margin: 5px;
+  }
+
+  .hamburger{
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top:50%;
+    transform: translate(-5%,-50%);
+    z-index: 2;
+  }
+
+
+  .nav-links li {
+    opacity: 0;
+  }
+
+  .nav-links li a {
+    font-size: 21px;
+  }
+  .nav-links li:nth-child(1){
+    transition: all 0.5s ease 0.2s;
+  }
+  .nav-links li:nth-child(2){
+    transition: all 0.5s ease 0.2s;
+  }
+  .nav-links li:nth-child(3){
+    transition: all 0.5s ease 0.4s;
+  }
+  .nav-links li:nth-child(4){
+    transition: all 0.5s ease 0.4s;
+  }
+  .nav-links li:nth-child(4){
+    transition: all 0.5s ease 0.4s;
+  }
+
+  li.fade{
+    opacity: 1;
+  }
+
+
+}
+
+@media screen and (max-width:400px){
+  .logo{
+    font-size: 14px;
+    margin-left: 5px;
+  }
+}
+
