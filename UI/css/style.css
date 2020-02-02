@@ -1,0 +1,232 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.5;
+}
+
+
+.services{
+    display: grid;
+    /* grid-gap: 10px; */
+    grid-template-columns: repeat(3,1fr);
+    padding-top: 10vh;
+    margin-left: 10%;
+}
+.service{
+    /* margin-left: 5%; */
+    padding: 20px;
+    border: 1px solid #1761A0;
+    color: #276CA6;
+    width: 70%;
+}
+.icon{
+    margin-top: -6vh;
+    border-radius: 5px;
+    border: 2px solid #1761A0;
+    padding: 10%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: #1761A0;
+    cursor: pointer;
+}
+.icon:hover{
+    color: rgba(255, 255, 255, 0.781);
+    background-color: rgb(17, 68, 112);
+    border: 2px solid rgb(17, 68, 112);
+}
+
+.details{
+    /* text-align: center; */
+    margin: 10px 10%;
+}
+
+.details ul li{
+    list-style: none;
+    line-height: 1.7;
+}
+.details ul li a{
+    color: #253862;
+}
+.details ul li a:hover{
+    color: #4C96D7;
+}
+
+
+.collaborations h2{
+    text-align: center;
+    padding: 20px;
+    font-family: sans-serif;
+    color: #253862;
+}
+
+.partners{
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(5,1fr);
+    padding: 10vh 5%;
+    background-color: rgba(192, 192, 192, 0.288);
+    height: 40vh;
+}
+.partner{
+    cursor: pointer;
+}
+.partner img{
+    height: 20vh;
+    border-radius: 10px;
+}
+.adjust{
+    width: 100%;
+    object-fit: cover;
+}
+.partner img:hover{
+    box-shadow:  rgba(58, 57, 57, 0.24) 0 4px 8px 0,  rgba(88, 88, 88, 0.103) 10px 6px 20px 0;
+}
+
+.contact{
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(3,1fr);
+    padding: 5vh 5%;
+    background-color: #F3F8FD;
+}
+
+.contact h3{
+    font-family: sans-serif;
+    color: #253862;
+}
+.social,.call{
+    cursor: pointer;
+    color: #1761A0;
+}
+#message{
+    padding: 10px 20px;
+    border: 1px solid #4C96D7;
+    border-radius: 10px;
+    outline: none;
+    width: 55%;
+    font-size: 18px;
+}
+#search{
+    background-color: #1761A0;
+    padding: 10px 20px;
+    border: 1px solid #1761A0;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+}
+
+#description{
+    display: none;
+    position: relative;
+    font-size: 22px;
+    margin-top: 5px;
+    font-family: 'Raleway', sans-serif;
+    color: #1761A0;
+}
+
+.social i{
+    margin-left: 10px;
+}
+#phone:hover{
+    color: green;
+}
+#phone:hover #description{
+    display: inline;
+}
+#facebook:hover{
+    color: #4267B2;
+}
+#facebook:hover #description{
+    display: inline;
+    color: #4267B2;
+}
+#instagram:hover{
+    color: #e4405f;
+}
+#instagram:hover #description{
+    display: inline;
+    color: #e4405f;
+}
+#twitter:hover{
+   color: #55ACEF; 
+}
+#twitter:hover #description{
+    display: inline;
+    color: #55ACEF;
+}
+#google:hover{
+    color: #dd4b39;
+}
+#google:hover #description{
+    display: inline;
+    color: #dd4b39;
+}
+
+
+@media(max-width: 750px){
+    #icon1{
+        font-size: 35px;
+    }
+    .service{
+        padding: 5px;
+        margin: 0px;
+        width: 100%;
+    }
+    .services{
+        grid-gap: 10px;
+    }
+    .partners{
+        grid-template-columns: repeat(3,1fr);
+        height: 52vh;
+    }
+    .partner img{
+        height: 15vh;
+    }
+
+    #icon2{
+        font-size: 35px;
+        margin: 0px;
+    }
+    #message{
+        width: 100%;
+        margin: 10px 0px ;
+    }
+
+
+}
+@media(max-width:400px){
+    .services{
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 7vh;
+        margin-left: 15%;
+    }
+    .service{
+        padding: 5px;
+        margin: 0px;
+        width: 70%;
+    }
+    .partners{
+        grid-template-columns: repeat(2,1fr);
+        height: 70vh;
+    }
+    .partner img{
+        height: 15vh;
+    }
+    .contact h3{
+        font-size: 18px;
+    }
+    .contact{
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: repeat(1,1fr);
+        padding: 5vh 5%;
+        background-color: #F3F8FD;
+    }
+
+}
