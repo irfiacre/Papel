@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign</title>
+    <link rel="shortcut icon" href="../images/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/sign.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <script src="https://kit.fontawesome.com/da7b84dcbd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+ <div class="container">
+<div class="logo">
+  <a href="../../index.html"><img src="../images/logo2.png" alt="Papel"></a>  
+</div>
+
+<div class="sign">
+<div id="myBtnContainer">
+      <button class="signin" onclick="filterSelection('sign-in')" onclick="color()">Sign In</button>
+      <button class="signup" onclick="filterSelection('sign-up')">Sign Up</button>
+ </div>  
+
+ <div class="row">
+        <div class="column sign-in">
+          <div class="content">
+
+                <form onsubmit="login()">
+                    <label for="email">
+                    <input type="email" name="email" class="input"  id="email" placeholder="Email....." required>
+                    </label> <br>
+            
+                    <label for="password">
+                        
+                        <div class="password">
+                            <span class="eye" onclick="change2()"><i class="fa fa-eye fa-2x" id="eye"></i></span>
+                            <span class="eyeSlash" onclick="change()"><i class="fa fa-eye-slash fa-2x" id="eye"></i></span>
+                            <input type="password" onkeyup="capslock()" name="password" class="input" id="password" value placeholder="Password....." required >
+                            <span class="warning">CAPSLOCK IS ON</span>
+
+                        </div>
+                        
+                        <br>
+                   
+                   
+                    </label> <br>
+
+                    <p>
+                            <a href="#"><i>Forgot Password?</i></a> 
+                            <span><i><input type="checkbox" id="check"> Keep me signed in</i></span> 
+                    </p>
+                    
+                   <div><a href="../html/profile.html"> 
+                    <input type="button" value="Login" id="signin" onclick="login()">
+                    </a> 
+                    </div>
+
+                    
+                   
+                </form>
+             
+          </div>
+        </div>   
+        
+        
+          <div class="column sign-up">
+            <div class="content2">
+                <form action="">
+                <div class="inputs">
+
+                <input type="text" class="input" placeholder="First Name...">
+                <input type="text" class="input" placeholder="Last Name....">
+                <input type="text" class="input" placeholder="Email...">
+                <input type="password" class="input" placeholder="Password....">
+                <input type="password" class="input" placeholder="Confirm Password...">
+
+                </div> <br>
+                <div class="more">
+                <span id="check2"><input type="checkbox" id="agree">I agree with the <i>Terms and Conditions </i></span>
+                <div><a href="../html/openAc.html"> 
+                    <input type="button" value="Sign Up" id="signin">
+                    </a> 
+                    </div> 
+
+                </div>
+            </form>
+
+
+            </div>
+        </div>
+
+</div>
+</div>
+
+
+</div>
+
+<div class="footer">
+  
+    <footer>
+            <p>Papel Inc © 2020 All Right Reserved Terms of Use and Privacy Policy</p>
+    </footer>
+</div>
+
+
+<script src="../javascript/sign.js"></script>   
+</body>
+</html>
