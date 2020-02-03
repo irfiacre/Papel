@@ -11,13 +11,11 @@ html{
 
 .services{
     display: grid;
-    /* grid-gap: 10px; */
     grid-template-columns: repeat(3,1fr);
     padding-top: 10vh;
     margin-left: 10%;
 }
 .service{
-    /* margin-left: 5%; */
     padding: 20px;
     border: 1px solid #1761A0;
     color: #276CA6;
@@ -41,7 +39,6 @@ html{
 }
 
 .details{
-    /* text-align: center; */
     margin: 10px 10%;
 }
 
@@ -200,7 +197,7 @@ html{
 
 
 }
-@media(max-width:400px){
+@media(max-width:450px){
     .services{
         grid-template-columns: repeat(1,1fr);
         grid-gap: 7vh;
