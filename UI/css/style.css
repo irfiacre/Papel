@@ -21,6 +21,10 @@ html{
     color: #276CA6;
     width: 70%;
 }
+h4 a{
+    color: #276CA6;
+}
+
 .icon{
     margin-top: -6vh;
     border-radius: 5px;
