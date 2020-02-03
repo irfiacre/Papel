@@ -1,0 +1,159 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font-family: 'Raleway',sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+body{
+    background-color: #F3F8FD;
+    padding-bottom: 0;
+}
+nav{
+    background-color: white;
+}
+.bodyContainer{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2,1fr);
+}
+.actions{
+    background-color: #1761A0;
+    color: white;
+    width: 40%;
+    height: 100vh;
+}
+.type1{
+    padding: 10vh;
+    cursor: pointer;
+}
+.type2{
+    padding: 10vh;
+    cursor: pointer;
+}
+
+#debit:hover{
+    background-color: rgb(34, 122, 199);
+}
+
+#debit2{
+    background-color: rgb(34, 122, 199);
+}
+
+#credit:hover{
+    background-color: rgb(21, 74, 121);
+}
+
+#credit2{
+    background-color: rgb(21, 74, 121);
+}
+.all{
+    padding: 10vh 0px;
+    margin-left: -45%;
+}
+
+.viewDebit2{
+    display: none;
+}
+
+
+.text{
+    padding: 7px 20px;
+    background-color: white;
+    border: 1px solid #539AD9;
+    border-radius: 5px;
+    width: 30%;
+    outline: none;
+    font-family: 'Lato',sans-serif;
+}
+.text:focus{
+    background-color: rgba(231, 243, 255, 0.418);
+}
+select{
+    margin-top: 5px;
+    padding: 7px 20px;
+    background-color: white;
+    border: 1px solid #539AD9;
+    outline: none;
+    border-radius: 5px;
+    
+}
+#debitBtn{
+    padding: 10px 20px;
+    background-color: #1761A0;
+    border: 1px solid #1761A0;
+    color: white;
+    width: 98px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Lato',sans-serif;
+    font-size: 16px;
+
+}
+#debitBtn:hover{
+    background-color: rgb(34, 122, 199);
+    border: 1px solid rgb(34, 122, 199);
+}
+#debitBtn:focus{
+    background-color: rgb(34, 122, 199);
+    border: 1px solid rgb(34, 122, 199);
+}
+
+
+.viewCredit{
+    display: none;
+}
+
+
+
+#creditBtn{
+    padding: 10px 20px;
+    background-color: #1761A0;
+    border: 1px solid #1761A0;
+    color: white;
+    width: 98px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Lato',sans-serif;
+    font-size: 16px;
+
+}
+#creditBtn:hover{
+    background-color: rgb(21, 74, 121);
+    border: 1px solid rgb(21, 74, 121);
+}
+#creditBtn:focus{
+    background-color: rgb(21, 74, 121);
+    border: 1px solid rgb(21, 74, 121);
+}
+
+
+@media(max-width:700px){
+    .type1{
+        padding: 10vh 10px;
+    }
+    .type2{
+        padding: 10vh 10px;
+    }
+    .text{
+        padding: 5px 20px;
+        width: 170px;
+    }
+    .actions{
+        width: 100px;
+    }
+    .all{
+        margin-left: -100px;
+    }
+}
+@media(max-width:450px){
+    .all{
+        margin-left: -50px;
+    }
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anuarite</title>
+    <link rel="shortcut icon" href="../images/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/cashier.css">
+    <link rel="stylesheet" href="../css/moodle.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link href="https://fonts.googleapis.com/css?family=Karla|Lato|Nunito|Raleway|Rubik&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/da7b84dcbd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="cashierContainer">
+        <div class="header">
+                    
+                <nav>
+                    <div class="hamburger">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    
+                    <div class="logo">     
+                        <a href="../../index.html"> 
+                            <img src="../images/logo2.png" alt="Papel logo">
+                            </a> 
+                    </div>
+                    
+                    <ul class="nav-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="../../index.html">Log out</a></li>
+                        
+                    </ul>
+                    
+                </nav>
+            </div> 
+
+ <div class="bodyContainer">
+     <div class="actions">
+        <div class="type1" id="debit" onclick="change2()">
+           <h2>DEBIT</h2> 
+
+        </div>
+        <div class="type2"  id="credit" onclick="change()">
+            <h2>CREDIT</h2> 
+     
+        </div>
+     </div>
+
+     <div class="all">
+     <div class="viewDebit">
+        <form action="">
+        <p><b>Date:</b><label for="date"><br>
+                <input type="date" name="date" id="date" class="text">
+        </label></p> <br>
+
+        <p><b>Transaction type:</b><label for="date"><br>
+            <i>Debit</i>
+        </label></p><br>
+
+        <p><b>Account No:</b><label for="account"><br>
+            <input type="text" name="account" class="text" required  placeholder="Account Number">
+        </label></p><br>
+
+        <p><b>Cashier ID:</b><label for="cashier"><br>
+            <input type="text" name="cashier" class="text" required  placeholder="Cashier ID">
+        </label></p><br>
+
+        <p><b>Amount:</b><label for="account"><br>
+
+            <input type="text" name="account" class="text" required  placeholder="Amount"><br>
+            <select>
+                    <option value="savings">RWF</option>
+                    <option value="personal">USD</option>
+            </select>
+        </label></p><br>
+
+        <input type="button" value="Debit" id="debitBtn">
+      </form>
+     </div>
+     <div class="viewCredit">
+
+            <form action="">
+            <p><b>Date:</b><label for="date"><br>
+                    <input type="date" name="date" id="date" class="text">
+            </label></p> <br>
+    
+            <p><b>Transaction type:</b><label for="date"><br>
+                <i>Credit</i>
+            </label></p><br>
+    
+            <p><b>Account No:</b><label for="account"><br>
+                <input type="text" name="account" class="text" required  placeholder="Account Number">
+            </label></p><br>
+    
+            <p><b>Cashier ID:</b><label for="cashier"><br>
+                <input type="text" name="cashier" class="text" required  placeholder="Cashier ID">
+            </label></p><br>
+    
+            <p><b>Amount:</b><label for="account"><br>
+                <input type="text" name="account" class="text" required  placeholder="Amount"><br>
+                <select>
+                        <option value="savings">RWF</option>
+                        <option value="personal">USD</option>
+                </select>
+            </label></p><br>
+    
+            <input type="button" value="Credit" id="creditBtn">
+          </form>
+         </div>
+
+
+
+
+
+
+
+
+    </div>
+ </div>
+
+
+<div>
+        <footer>
+            
+                <p>Papel Inc © 2020 All Right Reserved Terms of Use and Privacy Policy</p>
+            
+        </footer>
+        </div>
+</div>
+    <script src="../javascript/nav.js"></script>
+    <script src="../javascript/cashier.js"></script>
+</body>
+</html>
