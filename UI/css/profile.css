@@ -1,0 +1,236 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family:  'Raleway',sans-serif; 
+}
+
+body{
+    line-height: 1.4;
+    background-color:whitesmoke;
+}
+.profilePict{
+    width: 150px;
+    margin-left: 110px;
+      
+}
+#profilePic{
+    width: 100%;
+    border-radius: 50%;
+    margin-top: 110px;
+    border: 5px solid white;  
+}
+.profile{
+    background-color: #4C96D7;
+    background-position: center;
+    background-size: cover;
+    height: 220px;
+}
+
+.inform{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 
+    'profileInfo cover cover cover';
+}
+.profileInfo{
+    grid-area: profileInfo;
+    padding: 10px;
+    margin-top: 40px;
+    width: 50%;
+    margin-left: 100px;
+}
+
+table th{
+    padding: 3px;
+    text-align: justify;
+}
+
+table td{
+    padding-left: 30px;
+    text-align: justify;
+}
+
+
+.cover{
+    grid-area: cover;
+    display: grid;
+    grid-gap: 10px;
+    padding: 30px;
+}
+.cover a{
+   color: #000;
+   text-decoration: none;
+   font-size: 18px;
+   font-weight: 10; 
+}
+
+.creditc{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.card{
+    background-color: rgb(221, 238, 255);
+    padding: 30px;
+}
+
+.loan{
+    background-color: rgb(221, 238, 255);
+    padding: 30px;
+}
+
+.activity{
+    background-color: rgb(221, 238, 255);
+    padding: 30px;
+    height: 300px;
+}
+#transaction{
+    cursor: pointer;
+}
+
+#balenceBtn{
+    position: relative;
+    bottom: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #1761A0;
+    border: 1px solid #1761A0;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+#balenceBtn:hover{
+    background-color: #2DA7BC;
+    color: rgba(255, 255, 255, 0.623);
+}
+
+
+.main{
+    width: 90%;
+}
+
+#total th{
+    border-top: 1px solid black;    
+}
+#total td{
+    border-top: 1px solid black;    
+}
+
+#check{
+    color: green;
+}
+#crossed{
+    color: #C01C25;
+}
+
+@media screen and (max-width:990px){
+    .cover{
+        font-size: 14px;
+        padding: 10px;
+    }
+    .profileInfo{
+        padding: 0px;
+        margin-top: 40px;
+        width: 50%;
+        margin-left: 0px;
+    }  
+    .card{
+        background-color: rgb(223, 230, 231);
+        padding:15px;
+    }
+    
+    .loan{
+        background-color: rgb(223, 230, 231);
+        padding:15px;
+    }
+    .activity{
+        background-color: rgb(223, 230, 231);
+        padding:15px;
+        height: 300px;
+    } 
+    
+}
+@media screen and (max-width:820px){
+    .inform{
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas: 
+        'profileInfo'
+        'cover';
+    }
+    .cover{
+        font-size: 14px;
+        padding: 10px;
+    }
+    .profileInfo{
+        padding: 10px;
+        margin-top: 40px;
+        width: 50%;
+        margin-left: 0px;
+    } 
+    .profile{
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width:580px){
+    body{        
+        font-size: 14px;
+    }
+    .profile{
+        height: 150px;
+    }
+    .cover p{
+        padding: 0px;
+        font-size: 14px;   
+    }
+    .profilePict{
+        width: 90px;
+        margin-left: 10px;
+        margin-top: -30px;
+    }
+    .main{
+        width: 50%;    
+        font-size: 14px;
+        padding: 0px;
+    }
+    .main th{
+        padding: 0px;
+    }
+    .main td{
+        padding: 0px;
+    }
+    
+    #total th{
+        border-top: 1px solid black;    
+    }
+    #total td{
+        border-top: 1px solid black;    
+    }
+        
+    .card{
+        background-color: rgb(223, 230, 231);
+        padding: 7px;
+    }
+
+    .loan{
+        background-color: rgb(223, 230, 231);
+        padding: 7px;
+    }
+    .activity{
+        background-color: rgb(223, 230, 231);
+        padding: 7px;
+        height: 300px;
+    } 
+    
+}
+
+
+
+
+
