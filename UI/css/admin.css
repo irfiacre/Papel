@@ -204,10 +204,13 @@ h1{
     h1{
         font-size: 18px;
     }
+    .user{
+        margin-left: -30px;
+    }
     .content{
-        margin-top: -10vh;
+        margin-top: ;
         height: 70vh;
-        margin-left: 5px;
+        margin: -10vh 15px;
     }
     .image{
         margin-left: 0px;

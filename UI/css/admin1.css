@@ -1,0 +1,140 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font-family: 'Lato',sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+body{
+    background-color: #F3F8FD;
+    padding-bottom: 0;
+}
+nav{
+    background-color: white;
+}
+.bodyContainer{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2,1fr);
+}
+.actions{
+    background-color: rgb(9, 44, 75);
+    width: 40%;
+    height: 100vh;
+}
+.type{
+    padding: 3vh 10vh;
+    cursor: pointer;
+}
+
+.actions a{
+    color: rgba(255, 255, 255, 0.863);
+
+}
+
+
+#changed{
+    background-color: rgb(34, 122, 199);
+    color: white;
+}
+
+.all{
+    padding: 10vh 0px;
+    margin-left: -50%;
+}
+.user{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.text{
+    padding: 7px 20px;
+    background-color: white;
+    border: 1px solid rgb(20, 98, 167);
+    border-radius: 5px;
+    width: 30%;
+    outline: none;
+    font-family: 'Lato',sans-serif;
+}
+.text:focus{
+    background-color: rgba(231, 243, 255, 0.418);
+}
+select{
+    margin-top: 5px;
+    padding: 7px 20px;
+    background-color: white;
+    border: 1px solid rgb(15, 68, 116);
+    outline: none;
+    border-radius: 5px;
+    
+}
+#createBtn{
+    padding: 10px 20px;
+    background-color: rgb(15, 68, 116);
+    border: 1px solid rgb(15, 68, 116);
+    color: white;
+    width: 98px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Lato',sans-serif;
+    font-size: 16px;
+
+}
+#createBtn:hover{
+    background-color: rgb(34, 122, 199);
+    border: 1px solid rgb(34, 122, 199);
+}
+#createBtn:focus{
+    background-color: rgb(34, 122, 199);
+    border: 1px solid rgb(34, 122, 199);
+}
+
+
+
+
+
+
+
+
+
+@media(max-width:850px){
+    .type{
+        padding: 10vh 10px;
+        cursor: pointer;
+    }
+    .text{
+        padding: 5px 20px;
+        width: 170px;
+    }
+    .actions{
+        width: 60%;
+    }
+    .all{
+        margin-left: -100px;
+    }
+}
+@media(max-width:450px){
+    .all{
+        margin-left: -70px;
+    }
+    .actions a{
+        font-size: 14px;
+    }
+    .actions{
+        height: 115vh;
+    }
+
+    .account h1{
+        font-size: 18px;
+        margin-top: -7vh;
+        margin-bottom: 3vh;
+
+    }
+
+}
