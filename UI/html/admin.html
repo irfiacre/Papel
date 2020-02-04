@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Administrator</title>
+    <link rel="shortcut icon" href="../images/logo1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/moodle.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://fonts.googleapis.com/css?family=Karla|Lato|Nunito|Raleway|Rubik&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/da7b84dcbd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="adminContainer">
+        <div class="header">
+                    
+                <nav>
+                    <div class="hamburger">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>
+                    
+                    <div class="logo">     
+                        <a href="../../index.html"> 
+                            <img src="../images/logo2.png" alt="Papel logo">
+                            </a> 
+                    </div>
+                    
+                    <ul class="nav-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="../../index.html">Log out</a></li>
+                        
+                    </ul>
+                    
+                </nav>
+            </div> 
+
+ <div class="bodyContainer">
+     <div class="actions">
+     <a href="#"><div class="type" id="changed" >
+           <h2>User Accounts</h2> 
+
+        </div></a>
+
+
+        <a href="admin1.html"><div class="type">
+            <h2>Create Account</h2> 
+        </div></a>
+        <a href="admin1.html">
+        <div class="type" >
+                <h2>Web Activity</h2> 
+        
+        </div>
+        </a>
+     </div>
+
+     <div class="all">
+        <div class="userAll">
+            <h1>Website Users</h1>
+            <div class="user">
+                    <div class="pic" id="user">
+                            <img src="../images/biz.jpg" alt="user 1">
+                    </div>
+        
+                        <div class="details">
+                                <table>
+                                        <tr>
+                                            <th>Name: </th> <td>Micheal Dinks</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email: </th> <td>kar@gmail.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Status: </th> <td>Client</td>
+                                        </tr>
+                                </table> 
+                        </div>
+        
+                        <div class="delete1">
+                        <input type="button" name="delete" class="delete" value="Delete"  onclick="Delete()">
+                        </div>
+            </div>
+                
+            <div class="user">
+                    <div class="pic" id="user">
+                            <img src="../images/nad.jpg" alt="user 2">
+                        </div>
+                        
+                        <div class="details">
+                                <table>
+                                        <tr>
+                                            <th>Name: </th> <td>Kundwa Anuarithe</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email: </th> <td>kundan@papel.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Status: </th> <td> Staff</td>
+                                        </tr>
+                                </table> 
+                        </div>
+                        
+                        <div class="delete1">
+                        <input type="button" name="delete" class="delete" value="Delete" onclick="Delete()">
+                    </div>
+            </div>
+                
+            <div class="user">
+                    <div class="pic" id="user">
+                            <img src="../images/denyse.jpeg" alt="User 3" >
+                       </div>
+        
+                        <div class="details">
+                                <table>
+                                        <tr>
+                                            <th>Name: </th> <td>Denyse Su</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email: </th> <td>desu@papel.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Status: </th> <td>Administrator</td>
+                                        </tr>
+                                </table> 
+                        </div>
+                        <div class="delete1">
+                                <input type="button" name="delete" class="delete" value="Delete" onclick="Delete()">
+                                </div>
+                        </div>
+            </div>
+
+            <div id="modal1" class="modal">
+                
+                    <div class="content">
+                            <div class="conten1">
+                        <div class="header1">
+                          <span class="close"><i class="far fa-window-close"></i></span>
+                          <h2>User:1</h2>
+                      </div>
+                    
+                      <div class="body">
+                        
+                              <div class="userDetails">
+
+                                <div class="user1">
+
+                                <div class="image">
+                                    <img src="../images/biz.jpg" alt="biz">
+                                    
+                               </div>
+                               <div class="information">
+                                    <table>
+                                            <tr>
+                                                <th>Name: </th> <td>Micheal Dinks</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email: </th> <td>kar@gmail.com</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Status: </th> <td>Client</td>
+                                            </tr>
+                                    </table> 
+                                    <div class="active">
+                                        <i class="fas fa-check-square fa-1x"> <b>ACTIVE</b> </i> 
+                                    </div>
+                                    <div class="none">
+                                        <i class="fas fa-window-close fa-1x"> <b>DEACTIVATED</b> </i>
+                                    </div>
+                               </div>
+
+                              </div>
+                              </div>
+                              <div class="deactivate">
+                                <input type="button" class="deactiveBtn" value="Deactivate Account" id="deactivate" onclick="deactive()">
+                            </div>
+                          
+                        </div>  
+                      </div>
+                        </div>
+                </div>
+        
+    </div>
+
+</div>
+    </div>
+ </div>
+
+
+<div>
+        <footer>
+            
+                <p>Papel Inc © 2020 All Right Reserved Terms of Use and Privacy Policy</p>
+            
+        </footer>
+        </div>
+</div>
+    <script src="../javascript/nav.js"></script>
+    <script src="../javascript/admin.js"></script>
+</body>
+</html>
