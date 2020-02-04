@@ -22,7 +22,7 @@ nav{
     grid-template-columns: repeat(2,1fr);
 }
 .actions{
-    background-color: #1761A0;
+    background-color: rgb(21, 88, 146);
     color: white;
     width: 40%;
     height: 100vh;
