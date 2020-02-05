@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: 'Raleway',sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+body{
+    background-color: #F3F8FD;
+}
+
+.reset,.accept{
+    margin-top: 10vh;
+    margin-left: 30%;
+    background-color: white;
+    padding: 40px;
+    text-align: center;
+    width: 35%;
+    height: 40vh;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.newPass{
+    padding: 10px 20px;
+    width: 90%;
+    border: 1px solid #276CA6;
+    margin-top: 15px;
+    border-radius: 30px;
+    outline: none;
+    font-size: 16px;
+}
+.newPass:hover{
+    border: 1px solid #2DA7BC;
+}
+.newPass:focus{
+    border: 1px solid #2DA7BC;
+}
+
+.submit{
+    background-color: #276CA6;
+    position: relative;
+    padding: 10px 20px;
+    width: 45%;
+    outline: none;
+    border: 1px solid #276CA6;
+    color: white;
+    margin-top: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit:hover{
+    background-color: #32AEC3;
+    border: 1px solid #32AEC3;
+    color: white;
+}
+.submit:focus{
+    background-color: #32AEC3;
+    border: 1px solid #32AEC3;
+    color: white;
+}
+
+.acceptBox{
+    color: #1761A0;
+}
+.acceptBox a{
+    color: #1761A0;
+}
+
+@media(max-width:500px){
+    .reset{
+        margin-left: 5%;
+        width: 90%;
+        height: 50vh;
+    }
+    .accept{
+        margin-left: 5%;
+        width: 90%;
+        height: 60vh;
+    }
+}
