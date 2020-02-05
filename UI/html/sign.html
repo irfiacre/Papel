@@ -26,7 +26,7 @@
         <div class="column sign-in">
           <div class="content">
 
-                <form onsubmit="login()">
+                <form id="signIn" name="signin" action="userAcc.html">
                     <label for="email">
                     <input type="email" name="email" class="input"  id="email" placeholder="Email....." required>
                     </label> <br>
@@ -39,11 +39,7 @@
                             <input type="password" onkeyup="capslock()" name="password" class="input" id="password" value placeholder="Password....." required >
                             <span class="warning">CAPSLOCK IS ON</span>
 
-                        </div>
-                        
-                        <br>
-                   
-                   
+                        </div> <br>
                     </label> <br>
 
                     <p>
@@ -52,7 +48,7 @@
                     </p>
                     
                    <div><a href="../html/userAcc.html"> 
-                    <input type="button" value="Login" id="signin" onclick="login()">
+                    <input type="submit" value="Login" id="signin" class="submit">
                     </a> 
                     </div>
 

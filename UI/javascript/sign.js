@@ -65,6 +65,29 @@ signin.addEventListener('click',color2);
 
 
 
+const loginDirecton = () => {
+  const submit = document.querySelector(".submit");
+  const signinAction = document.querySelector("#signIn")
+  const email = document.querySelector("#email");
+  const password = document.querySelector("#password");
+  const adminEmail = "admin@papel.com";
+  const adminPassword = "admin@123";
+  const cashierEmail = "cashier@papel.com";
+  const cashierPassword = "cashier@123"
+
+  submit.addEventListener("click", () => {
+      if(email.value === adminEmail && password.value === adminPassword){
+          signinAction.setAttribute("action", "admin.html");
+      }
+      if(email.value === cashierEmail && password.value === cashierPassword){
+          signinAction.setAttribute("action", "cashier.html");
+      }
+  })
+}
+loginDirecton();
+
+
+
 
 
 
