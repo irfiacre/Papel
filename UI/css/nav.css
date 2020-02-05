@@ -14,6 +14,7 @@
 
   nav{
     height: 12vh;
+    background-color: white;
   }
   .nav-links{
     display: flex;
@@ -49,16 +50,6 @@
     margin: -2px 30px;
     font-size: 25px;
     height: 15vh;
-  }
-
-  #userProfile{
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
-  #userProfile:hover{
-    border: 4px solid white;
   }
 
 @media screen and (max-width:700px){
