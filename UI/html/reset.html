@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="../images/logo1.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/sign.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Karla|Lato|Nunito|Raleway|Rubik&display=swap" rel="stylesheet">
 </head>
@@ -29,9 +30,10 @@
     <div class="resetBox">
         <h2>RESET PASSWORD</h2>
         <div class="inputs">
-            <input type="password" class="newPass" name="newPass" placeholder="New Password"> <br>
-            <input type="password" class="newPass" name="newPassw" placeholder="Confirm New Password">
+            <input type="password" class="newPass" name="newPass" onkeyup="capslock()" id="password" placeholder="New Password"> <br>
+            <input type="password" class="newPass" name="newPassw" onkeyup="capslock()" id="password" placeholder="Confirm New Password">
         </div>
+            <span class="warning">CAPSLOCK IS ON</span>
         <div class="submit1">
         <a href="reset2.html"><input type="button" value="Submit" class="submit"></a>    
         </div>
@@ -46,5 +48,7 @@
                 <p>Papel Inc © 2020 All Right Reserved Terms of Use and Privacy Policy</p>
         </footer>
     </div>
+
+    <script src="../javascript/sign.js"></script>
 </body>
 </html>
