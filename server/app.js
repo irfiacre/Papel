@@ -1,10 +1,11 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import client from './routes/clientRoute';
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/', client);
 
 app.use((req, res) => res.status(400).json({
   status: 400,
@@ -13,4 +14,4 @@ app.use((req, res) => res.status(400).json({
 }));
 
 
-module.exports = app;
+export default app;
