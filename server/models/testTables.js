@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users(
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-INSERT INTO users(email,firstname,lastname,password)VALUES('fi@mail.com','RASTA','Never','$2b$10$c1wOrxcGDy.uYxedZn4qEOnq/O2R9rNQPDJnwkvNiEDWVK76yT4Yy');`;
+INSERT INTO users(email,firstname,lastname,password)VALUES('fia@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');`;
 
 const tables = async () => {
   await pool.query(tablesCreator).then(() => {

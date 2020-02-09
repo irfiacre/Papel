@@ -7,7 +7,7 @@ const dumData = [
     password: '1q2w3e',
   },
   {
-    email: 'fi@mail.com',
+    email: 'fia@mail.com',
     firstName: 'kaztyty',
     lastName: 'Datiii',
     password: 'uiuiuiu',
@@ -36,6 +36,26 @@ const dumData = [
     firstName: 'kazik',
     lastName: 'Dotiva',
     password: '1qjeeeew3e',
+  },
+  {
+    email: 'fia@mail.com',
+    password: 'user123',
+  },
+  {
+    email: 'fia@mail.com',
+    password: '1qjeeeew3e',
+  },
+  {
+    email: 'fa@mail.com',
+    password: '1qjeeeew3e',
+  },
+  {
+    email: '',
+    password: '1qjeeeew3e',
+  },
+  {
+    email: 'fai@mail.com',
+    password: '',
   },
 
 ];
