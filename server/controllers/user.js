@@ -52,8 +52,8 @@ class UserSign {
     const emailget = 'SELECT * FROM users WHERE email =$1';
     const { rows: [emailGot] } = await pool.query(emailget, [req.body.email]);
     if (!emailGot) {
-      return res.status(422).json({
-        status: 422,
+      return res.status(404).json({
+        status: 404,
         message: 'Invalid email address',
       });
     }

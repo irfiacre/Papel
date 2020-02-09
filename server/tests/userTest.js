@@ -97,7 +97,7 @@ describe('Test sign in', () => {
       .post('/auth/signin')
       .send(dumbData[8])
       .end((err, res) => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(404);
         done();
       });
   });
