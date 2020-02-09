@@ -1,3 +1,7 @@
+# PAPEL
+[![Maintainability](https://api.codeclimate.com/v1/badges/38c576278c9ea16aed17/maintainability)](https://codeclimate.com/github/irfiacre/Papel/maintainability)
+[![Build Status](https://travis-ci.org/irfiacre/Papel.svg?branch=develop)](https://travis-ci.org/irfiacre/Papel)
+ [![Coverage Status](https://coveralls.io/repos/github/irfiacre/Papel/badge.svg?branch=ft-signup-enpoint-171160536)](https://coveralls.io/github/irfiacre/Papel?branch=ft-signup-enpoint-171160536)
 
 >Papel is a light-weight core banking application that powers banking operations like account
 creation, customer deposits, and withdrawals. This app is meant to support a single bank, where

@@ -8,16 +8,17 @@ import dumbData from '../models/testData';
 chai.should();
 chai.use(chaiHttp);
 
-describe('test sign up', () => {  
+describe('test sign up', () => {
   it('should signup user', (done) => {
     chai.request(app)
       .post('/auth/signup')
       .send(dumbData[0])
       .end((err, res) => {
         expect(res).to.have.status(201);
+        done();
       });
-    done();
   });
+
 
   it('email already exists', (done) => {
     chai.request(app)
@@ -25,8 +26,8 @@ describe('test sign up', () => {
       .send(dumbData[1])
       .end((err, res) => {
         expect(res).to.have.status(422);
+        done();
       });
-    done();
   });
 
   it('should not sign-up user,email is not allowed to be empty', (done) => {
@@ -35,8 +36,8 @@ describe('test sign up', () => {
       .send(dumbData[2])
       .end((err, res) => {
         expect(res).to.have.status(422);
+        done();
       });
-    done();
   });
 
   it('should not sign-up user,email must be a valid email', (done) => {
@@ -45,8 +46,8 @@ describe('test sign up', () => {
       .send(dumbData[3])
       .end((err, res) => {
         expect(res).to.have.status(422);
+        done();
       });
-    done();
   });
 
   it('should not sign-up user, name must only contain alpha-numeric characters', (done) => {
@@ -56,7 +57,19 @@ describe('test sign up', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(422);
         expect(res).to.have.status(422);
+        done();
       });
-    done();
+  });
+  it('should not signup, id not found', (done) => {
+    chai.request(app)
+      .post('/auth/signup')
+      .send(dumbData[5])
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(422);
+        expect(res).to.have.status(422);
+        done();
+      });
   });
 });
+
+

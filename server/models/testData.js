@@ -30,6 +30,13 @@ const dumData = [
     lastName: 'D,,tiva',
     password: '1qeeeew3e',
   },
+  {
+    id: '',
+    email: 'firk@l.bmk',
+    firstName: 'kazik',
+    lastName: 'Dotiva',
+    password: '1qjeeeew3e',
+  },
 
 ];
 
