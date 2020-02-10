@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
+import { type } from 'os';
 import pool from '../config/db-config';
 
 class UserSign {
@@ -22,7 +23,7 @@ class UserSign {
       password: await bcrypt.hash(req.body.password, 10),
       type: 'client',
       is_admin: false,
-    };   
+    };
 
     const inserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';
 
@@ -60,7 +61,7 @@ class UserSign {
 
     const getPassword = 'SELECT * FROM users  WHERE email = $1;';
     const { rows: [passwordGot] } = await pool.query(getPassword, [req.body.email]);
-    
+
     const password = await bcrypt.compare(req.body.password, passwordGot.password);
     if (!password) {
       return res.status(400).json({
@@ -79,9 +80,12 @@ class UserSign {
     const token = jwt.sign({
       id: passwordGot.id,
       email: passwordGot.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
       type: passwordGot.type,
       is_admin: passwordGot.is_admin,
     }, 'jwtprivatekey');
+
 
     res.status(200).json({
       status: 200,
@@ -91,6 +95,43 @@ class UserSign {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+      },
+    });
+  }
+
+  static async createAccount(req, res) {
+    const account = {
+      createdOn: req.body.date,
+      firstName: req.userData.firstName,
+      lastName: req.userData.lastName,
+      type: req.body.type,
+    };
+    let owner = `${account.firstName} ${account.lastName}`;
+
+
+    if (account.type !== 'current' && account.type !== 'savings') {
+      return res.status(400).json({
+        status: 400,
+        message: 'Account must either be savings or current',
+      });
+    }
+
+    const inserter2 = 'INSERT INTO accounts(createdon,owner,type) VALUES($1,$2,$3) RETURNING *;';
+
+    const { rows } = await pool.query(inserter2,
+      [account.createdOn, owner, account.type]);
+
+    const accountGet = rows.find((obj) => obj.accountno);
+
+    res.status(201).json({
+      status: 201,
+      data: {
+        accountNumber: accountGet.accountno,
+        firstName: account.firstName,
+        lastName: account.lastName,
+        email: req.userData.email,
+        type: account.type,
+        openingBalance: accountGet.balance,
       },
     });
   }

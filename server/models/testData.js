@@ -58,6 +58,24 @@ const dumData = [
     password: '',
   },
 
+  {
+    date: 2012-11-27,
+    type: 'current',
+  },
+  {
+    date: 2012-12-27,
+    type: 'savings',
+  },
+  {
+    date: '20120927',
+    type: 'currnt',
+  },
+  {
+    date: 2012-12-27,
+    type: 'currentuiuiu',
+  },
+ 
+
 ];
 
 export default dumData;
