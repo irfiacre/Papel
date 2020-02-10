@@ -14,3 +14,14 @@ describe('Test for Authorisation', () => {
       });
   });
 });
+
+describe('Test for Authorisation', () => {
+  it('You must sign in to view', (done) => {
+    chai.request(app)
+      .get('/user/kd@kjs.dsu/accounts')
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        done();
+      });
+  });
+});
