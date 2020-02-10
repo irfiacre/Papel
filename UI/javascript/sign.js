@@ -49,8 +49,8 @@ const color =()=>{
   }
 }
 const color2 =()=>{
-  const signin = document.querySelector('.signin');
-  const signup = document.querySelector('.signup');
+  const signin = document.querySelector('.signin2');
+  const signup = document.querySelector('.signup2');
 
   if(signin.className=='signin2' && signup.className=='signup2'){
       signin.className='signin';
@@ -60,9 +60,6 @@ const color2 =()=>{
 
 signup.addEventListener('click',color);
 signin.addEventListener('click',color2);
-
-
-
 
 
 const loginDirecton = () => {
@@ -85,26 +82,6 @@ const loginDirecton = () => {
   })
 }
 loginDirecton();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 filterSelection("sign-in")
 
