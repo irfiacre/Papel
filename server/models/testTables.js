@@ -16,12 +16,15 @@ CREATE TABLE IF NOT EXISTS accounts(
   accountNo SERIAL UNIQUE,
   createdOn VARCHAR(100) NOT NULL,
   owner VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
   type VARCHAR(100) NOT NULL,
   status VARCHAR(100) NOT NULL DEFAULT 'ACTIVE',
   balance FLOAT DEFAULT 0.001
 );
 
-INSERT INTO users(email,firstname,lastname,password)VALUES('fia@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');`;
+INSERT INTO users(email,firstname,lastname,password)VALUES('fia@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');
+INSERT INTO accounts(createdon,owner,email,type) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current');
+INSERT INTO accounts(createdon,owner,email,type) VALUES(2012-11-25,'kagabo divin','kag@mail.com','savings');`;
 
 const tables = async () => {
   await pool.query(tablesCreator).then(() => {

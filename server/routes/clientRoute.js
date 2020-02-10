@@ -10,5 +10,6 @@ const router = express.Router();
 router.post('/auth/signup', signupValid, UserSign.signup);
 router.post('/auth/signin', signinValid, UserSign.signin);
 router.post('/accounts', [authorisation, accountValid], UserSign.createAccount);
+router.get('/user/:email/accounts', authorisation, UserSign.viewAccount);
 
 export default router;

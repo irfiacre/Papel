@@ -107,6 +107,7 @@ class UserSign {
       type: req.body.type,
     };
     let owner = `${account.firstName} ${account.lastName}`;
+    let { email } = req.userData;
 
 
     if (account.type !== 'current' && account.type !== 'savings') {
@@ -116,10 +117,10 @@ class UserSign {
       });
     }
 
-    const inserter2 = 'INSERT INTO accounts(createdon,owner,type) VALUES($1,$2,$3) RETURNING *;';
+    const inserter2 = 'INSERT INTO accounts(createdon,owner,email,type) VALUES($1,$2,$3,$4) RETURNING *;';
 
     const { rows } = await pool.query(inserter2,
-      [account.createdOn, owner, account.type]);
+      [account.createdOn, owner, email, account.type]);
 
     const accountGet = rows.find((obj) => obj.accountno);
 
@@ -129,12 +130,43 @@ class UserSign {
         accountNumber: accountGet.accountno,
         firstName: account.firstName,
         lastName: account.lastName,
-        email: req.userData.email,
+        email: accountGet.email,
         type: account.type,
         openingBalance: accountGet.balance,
       },
     });
   }
+
+  static async viewAccount(req, res) {
+    let  email = req.params.email;
+
+    if (email !== req.userData.email) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Email not found in the Database',
+      });
+    }
+    const accounts = `SELECT * FROM accounts WHERE email='${email}'`;
+    const { rows } = await pool.query(accounts);
+
+    const accountsArray = [];
+    rows.forEach((account) => {
+      const accountData = {
+        createdOn: account.createdon,
+        accountNumber: account.accountno,
+        type: account.type,
+        status: account.status,
+        balance: account.balance,
+      };
+      accountsArray.push(accountData);
+    });
+
+    return res.status(200).json({
+      status: 200,
+      accounts: accountsArray,
+    });
+  }
 }
+
 
 export default UserSign;

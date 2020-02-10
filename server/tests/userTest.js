@@ -167,3 +167,27 @@ describe('Test User create account', () => {
       });
   });
 });
+
+describe('Test Accounts view', () => {
+  it('should show all accounts', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/user/fia@mail.com/accounts')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('should not  show  any accounts', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/user/d@kjs.dsu/accounts')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+});
