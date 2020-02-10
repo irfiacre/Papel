@@ -73,7 +73,6 @@ describe('test sign up', () => {
 });
 
 describe('Test sign in', () => {
-
   it('should signin user', (done) => {
     chai.request(app)
       .post('/auth/signin')
@@ -114,6 +113,54 @@ describe('Test sign in', () => {
     chai.request(app)
       .post('/auth/signin')
       .send(dumbData[9])
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+});
+
+
+describe('Test User create account', () => {
+  it('should create new account', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .post('/accounts')
+      .set('Authorization', token)
+      .send(dumbData[11])
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        done();
+      });
+  });
+  it('should create new account', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .post('/accounts')
+      .set('Authorization', token)
+      .send(dumbData[12])
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        done();
+      });
+  });
+  it('Date must be a valid ISO 8601 date', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .post('/accounts')
+      .set('Authorization', token)
+      .send(dumbData[13])
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('type must be current or savings', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .post('/accounts')
+      .set('Authorization', token)
+      .send(dumbData[14])
       .end((err, res) => {
         expect(res).to.have.status(400);
         done();
