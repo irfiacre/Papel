@@ -43,7 +43,21 @@
     width: 400%;
     margin: 0;
     left: 0;
-    animation: 20s slidy infinite;
+    animation: 25s slidy infinite;
+}
+
+.started{
+    color: #1761A0;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: white;
+    cursor: pointer;
+}
+.started:hover{
+    background-color: #4C96D7;
+    color: white;
 }
 
 @keyframes slidy{

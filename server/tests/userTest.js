@@ -25,7 +25,7 @@ describe('test sign up', () => {
       .post('/auth/signup')
       .send(dumbData[1])
       .end((err, res) => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(409);
         done();
       });
   });
@@ -35,7 +35,7 @@ describe('test sign up', () => {
       .post('/auth/signup')
       .send(dumbData[2])
       .end((err, res) => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -45,7 +45,7 @@ describe('test sign up', () => {
       .post('/auth/signup')
       .send(dumbData[3])
       .end((err, res) => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -55,8 +55,8 @@ describe('test sign up', () => {
       .post('/auth/signup')
       .send(dumbData[4])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(422);
-        expect(res).to.have.status(422);
+        expect(res.statusCode).to.equal(400);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -65,8 +65,8 @@ describe('test sign up', () => {
       .post('/auth/signup')
       .send(dumbData[5])
       .end((err, res) => {
-        expect(res.statusCode).to.equal(422);
-        expect(res).to.have.status(422);
+        expect(res.statusCode).to.equal(400);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -88,7 +88,7 @@ describe('Test sign in', () => {
       .post('/auth/signin')
       .send(dumbData[7])
       .end((err, res) => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -106,7 +106,7 @@ describe('Test sign in', () => {
       .post('/auth/signin')
       .send(dumbData[9])
       .end((err, res) => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -115,7 +115,7 @@ describe('Test sign in', () => {
       .post('/auth/signin')
       .send(dumbData[9])
       .end((err, res) => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(400);
         done();
       });
   });
