@@ -9,8 +9,8 @@ class UserSign {
     const emailget = 'SELECT * FROM users WHERE email =$1';
     const { rows: [emailGot] } = await pool.query(emailget, [req.body.email]);
     if (emailGot) {
-      return res.status(422).json({
-        status: 422,
+      return res.status(409).json({
+        status: 409,
         message: 'Email already exists',
       });
     }
@@ -54,7 +54,7 @@ class UserSign {
     if (!emailGot) {
       return res.status(404).json({
         status: 404,
-        message: 'Invalid email address',
+        message: 'Email not Found',
       });
     }
 
@@ -63,8 +63,8 @@ class UserSign {
     
     const password = await bcrypt.compare(req.body.password, passwordGot.password);
     if (!password) {
-      return res.status(422).json({
-        status: 422,
+      return res.status(400).json({
+        status: 400,
         error: 'Invalid Password',
       });
     }
