@@ -180,8 +180,12 @@ class UserSign {
 
     const accounts = `SELECT * FROM accounts WHERE email='${email}' AND accountno = '${accNumber}';`;
     const { rows } = await pool.query(accounts);
-
-
+    if (!rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        error: 'NOT FOUND',
+      });
+    }
     const accountFinder = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
     if (!accountFinder) {
       return res.status(404).json({
