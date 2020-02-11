@@ -11,11 +11,10 @@ const accountValidator = (req, res, next) => {
   if (error) {
     return res.status(400).json({
       status: 400,
-      error: error.details[0].message,
+      error: 'Incorrect Date format please use YYYY-MM-DD',
     });
   }
   next();
-  
 };
 
 export default accountValidator;
