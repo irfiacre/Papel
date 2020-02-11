@@ -13,5 +13,6 @@ router.post('/accounts', [authorisation, accountValid], UserSign.createAccount);
 router.get('/user/:email/accounts', authorisation, UserSign.viewAccounts);
 router.get('/accounts/:accountNo', authorisation, UserSign.viewAccount);
 router.get('/accounts/:accountNo/transactions', authorisation, UserSign.accountHistory);
+router.get('/transactions/:transactionId', authorisation, UserSign.specificAccount);
 
 export default router;
