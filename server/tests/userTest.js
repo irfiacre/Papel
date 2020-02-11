@@ -258,3 +258,40 @@ describe('Test for view of account transactions history', () => {
       });
   });
 });
+
+
+
+describe('Test Account specific transacion', () => {
+  it('should show Account specific transacion', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/transactions/1')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+  it('The Transaction Id must be an integer', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/transactions/')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('The Transaction Id must be an integer', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/transactions/fgfgfgfgf')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
+
+});

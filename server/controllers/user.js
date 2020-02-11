@@ -169,14 +169,18 @@ class UserSign {
 
   static async viewAccount(req, res) {
     let { email } = req.userData;
-    const accounts = `SELECT * FROM accounts WHERE email='${email}'`;
-    const { rows } = await pool.query(accounts);
+    const accNumber = parseInt(req.params.accountNo);
+
     if (isNaN(req.params.accountNo)) {
       return res.status(400).json({
         status: 400,
         error: 'The account number must be an integer',
       });
     }
+
+    const accounts = `SELECT * FROM accounts WHERE email='${email}' AND accountno = '${accNumber}';`;
+    const { rows } = await pool.query(accounts);
+
 
     const accountFinder = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
     if (!accountFinder) {
@@ -235,6 +239,42 @@ class UserSign {
     return res.status(200).json({
       status: 200,
       data: transactionsArray,
+    });
+  }
+
+  static async specificAccount(req, res) {
+    const transId = parseInt(req.params.transactionId);
+    
+    if (isNaN(transId)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'The Transaction Id must be an integer',
+      });
+    }
+
+    const transQuery = `SELECT * FROM transactions WHERE id = '${transId}';`;
+    const { rows } = await pool.query(transQuery);
+    if (!rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Transaction is not found',
+      });
+    }
+
+    const transFind = rows.find((obj) => obj.id === parseInt(req.params.transactionId));
+
+    const transaction = {
+      transactionId: transFind.id,
+      createdOn: transFind.createdOn,
+      type: transFind.type,
+      accountNumber: transFind.accountno,
+      amount: transFind.amount,
+      oldBalance: transFind.oldbalance,
+      newBalance: transFind.newbalance,
+    };
+    return res.status(200).json({
+      status: 200,
+      data: transaction,
     });
   }
 }
