@@ -24,4 +24,13 @@ describe('Test for Authorisation', () => {
         done();
       });
   });
+
+  it('You must login to proceed with specific account', (done) => {
+    chai.request(app)
+      .get('/accounts/1')
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        done();
+      });
+  });
 });

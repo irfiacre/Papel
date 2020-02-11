@@ -137,8 +137,8 @@ class UserSign {
     });
   }
 
-  static async viewAccount(req, res) {
-    let  email = req.params.email;
+  static async viewAccounts(req, res) {
+    let {email} = req.params;
 
     if (email !== req.userData.email) {
       return res.status(404).json({
@@ -166,7 +166,39 @@ class UserSign {
       accounts: accountsArray,
     });
   }
-}
 
+  static async viewAccount(req, res) {
+    let  email = req.userData.email;
+    const accounts = `SELECT * FROM accounts WHERE email='${email}'`;
+    const { rows } = await pool.query(accounts);
+    if (isNaN(req.params.accountNo)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'The account number must be an integer',
+      });
+    }
+
+    const accountFinder = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
+    if (!accountFinder) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account Number not found.',
+      });
+    }
+
+    let accountDetails = {
+      createdOn: accountFinder.createdOn,
+      accountNumber: accountFinder.accountno,
+      ownerEmail: accountFinder.email,
+      type: accountFinder.type,
+      status: accountFinder.status,
+      balance: accountFinder.balance,
+    };
+    res.status(200).json({
+      status: 200,
+      data: accountDetails,
+    });
+  }
+}
 
 export default UserSign;
