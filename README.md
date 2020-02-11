@@ -31,6 +31,15 @@ deposit money.
 > - Password: user@123
 > - Or any other email and password.
 
+### Features:
+> - Sign in and Sign up.
+> - Open bank account.
+> - View user account dashboard(Transactions history): 
+> - Cashier can debit or credit user's bank account. 
+> - Administrator can change the status of a user bank account.
+> - Administrator can delete a user account
+> - Administrator can create  a staff account
+
 ### Prerequisites :
 
 - Clone this project with `https://github.com/irfiacre/Papel.git`
@@ -38,9 +47,22 @@ deposit money.
 
 #### UI
  - Navigate to the *index.html* file.
- - Open the file in your browser.
+ - Open the file in your browser preferably `Google chrome`.
  - Since these HTML and CSS based pages that can be run directly in your browser.
 
+
+#### API-Endpoints
+ ##### Installation
+> After clone open this in your code editor preferably Vs code.
+> -  `$ cd papel`
+> - `$ npm install`
+>
+
+ ##### To run the endpoints
+ > `npm run dev`
+
+ ##### To learn the tests
+ > `npm test`
 
 ### Technologies used:
 
@@ -50,6 +72,12 @@ deposit money.
 > - CSS   
 > - JAVASCRIPT 
 
+> Backend-API
+
+>- NodeJS/Express
+>- PostgreSQL 
+>- Mocha chai
+>- TRAVIS CI
 
 ### Project Management
 
