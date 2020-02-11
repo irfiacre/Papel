@@ -13,9 +13,6 @@ describe('Test for Authorisation', () => {
         done();
       });
   });
-});
-
-describe('Test for Authorisation', () => {
   it('You must sign in to view', (done) => {
     chai.request(app)
       .get('/user/kd@kjs.dsu/accounts')
@@ -33,4 +30,14 @@ describe('Test for Authorisation', () => {
         done();
       });
   });
+  it('You must login to view user account transactions history', (done) => {
+    chai.request(app)
+      .get('/accounts/1/transactions')
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        done();
+      });
+  });
 });
+
+

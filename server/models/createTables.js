@@ -1,7 +1,7 @@
 import pool from '../config/db-config';
 
 const tablesCreator = `
-DROP TABLE IF EXISTS users,accounts CASCADE;
+DROP TABLE IF EXISTS users,accounts,transactions CASCADE;
 CREATE TABLE IF NOT EXISTS users(
   id SERIAL PRIMARY KEY,
   email VARCHAR(35) UNIQUE NOT NULL,
@@ -20,7 +20,18 @@ CREATE TABLE IF NOT EXISTS accounts(
   type VARCHAR(100) NOT NULL,
   status VARCHAR(100) NOT NULL DEFAULT 'ACTIVE',
   balance FLOAT DEFAULT 0.001
-);`;
+);
+CREATE TABLE IF NOT EXISTS transactions(
+  id SERIAL PRIMARY KEY,
+  createdon VARCHAR(100) NOT NULL,
+  type VARCHAR(10) NOT NULL,
+  accountno INT NOT NULL,
+  amount FLOAT NOT NULL,
+  oldbalance FLOAT DEFAULT 0.000,
+  newbalance FLOAT DEFAULT 0.000
+);
+INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',1,10,0,10);
+`;
 
 const tables = async () => {
   await pool.query(tablesCreator).then(() => {

@@ -12,5 +12,6 @@ router.post('/auth/signin', signinValid, UserSign.signin);
 router.post('/accounts', [authorisation, accountValid], UserSign.createAccount);
 router.get('/user/:email/accounts', authorisation, UserSign.viewAccounts);
 router.get('/accounts/:accountNo', authorisation, UserSign.viewAccount);
+router.get('/accounts/:accountNo/transactions', authorisation, UserSign.accountHistory);
 
 export default router;

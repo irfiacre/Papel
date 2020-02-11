@@ -21,10 +21,20 @@ CREATE TABLE IF NOT EXISTS accounts(
   status VARCHAR(100) NOT NULL DEFAULT 'ACTIVE',
   balance FLOAT DEFAULT 0.001
 );
+CREATE TABLE IF NOT EXISTS transactions(
+  id SERIAL PRIMARY KEY,
+  createdon VARCHAR(100) NOT NULL,
+  type VARCHAR(10) NOT NULL,
+  accountno INT NOT NULL,
+  amount FLOAT NOT NULL,
+  oldbalance FLOAT DEFAULT 0.000,
+  newbalance FLOAT DEFAULT 0.000
+);
 
 INSERT INTO users(email,firstname,lastname,password)VALUES('fia@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');
 INSERT INTO accounts(createdon,owner,email,type) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current');
-INSERT INTO accounts(createdon,owner,email,type) VALUES(2012-11-25,'kagabo divin','kag@mail.com','savings');`;
+INSERT INTO accounts(createdon,owner,email,type) VALUES(2012-11-25,'kagabo divin','kag@mail.com','savings');
+INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',1,10,0,10);`;
 
 const tables = async () => {
   await pool.query(tablesCreator).then(() => {
