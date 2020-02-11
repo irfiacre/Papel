@@ -191,3 +191,36 @@ describe('Test Accounts view', () => {
       });
   });
 });
+
+describe('Test for specific account view', () => {
+  it('should show specific account', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/accounts/1')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+  it('specific account not found', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/accounts/1000')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+  it('specific account number must be an interger', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/accounts/hghghghgg')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+});
