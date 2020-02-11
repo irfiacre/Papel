@@ -224,3 +224,37 @@ describe('Test for specific account view', () => {
       });
   });
 });
+
+describe('Test for view of account transactions history', () => {
+  it('sould show user account transactions history', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/accounts/1/transactions')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('account number not found', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/accounts/100/transactions')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+  it('account number must be an interger', (done) => {
+    const token = process.env.CLIENT_TOKEN;
+    chai.request(app)
+      .get('/accounts/weoioew/transactions')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+});

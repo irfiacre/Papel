@@ -138,7 +138,7 @@ class UserSign {
   }
 
   static async viewAccounts(req, res) {
-    let {email} = req.params;
+    let { email } = req.params;
 
     if (email !== req.userData.email) {
       return res.status(404).json({
@@ -168,7 +168,7 @@ class UserSign {
   }
 
   static async viewAccount(req, res) {
-    let  email = req.userData.email;
+    let { email } = req.userData;
     const accounts = `SELECT * FROM accounts WHERE email='${email}'`;
     const { rows } = await pool.query(accounts);
     if (isNaN(req.params.accountNo)) {
@@ -197,6 +197,44 @@ class UserSign {
     res.status(200).json({
       status: 200,
       data: accountDetails,
+    });
+  }
+
+  static async accountHistory(req, res) {
+    let accountNumb = parseInt(req.params.accountNo);
+    if (isNaN(req.params.accountNo)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'The account number must be an integer',
+      });
+    }
+
+    const account = `SELECT * FROM transactions WHERE accountno = '${accountNumb}' `;
+    const { rows } = await pool.query(account);
+    if (!rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account number is not found',
+      });
+    }
+
+    const transactionsArray = [];
+    rows.forEach((transaction) => {
+      const transactionData = {
+        transactionId: transaction.id,
+        createdOn: transaction.createdOn,
+        type: transaction.type,
+        accountNumber: transaction.accountno,
+        amount: transaction.amount,
+        oldBalance: transaction.oldbalance,
+        newBalance: transaction.newbalance,
+      };
+      transactionsArray.push(transactionData);
+    });
+
+    return res.status(200).json({
+      status: 200,
+      data: transactionsArray,
     });
   }
 }
