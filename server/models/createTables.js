@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS transactions(
   newbalance FLOAT DEFAULT 0.000
 );
 INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',1,10,0,10);
+INSERT INTO users(email,firstname,lastname,password,is_admin)VALUES('admin@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS',true);
 `;
 
 const tables = async () => {
