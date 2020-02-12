@@ -31,3 +31,49 @@ describe('Test For admin to view accounts', () => {
       });
   });
 });
+
+
+describe('Test For admin to activate or deactivate', () => {
+  it('should Activate account', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .patch('/account/3')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+  it('should Activate account also', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .patch('/account/2')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('should Deactivate account', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .patch('/account/1')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('Account must be an integer', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .patch('/account/hjhdjfdj')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+});
