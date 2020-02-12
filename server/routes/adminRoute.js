@@ -6,6 +6,7 @@ import authorisation from '../middleware/authorisation';
 const router = express.Router();
 
 router.get('/accounts', [authorisation, adminCheck], admin.viewBankAccounts);
+router.patch('/account/:accountNo', [authorisation, adminCheck], admin.updateAccount);
 
 
 export default router;
