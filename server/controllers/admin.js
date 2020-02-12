@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
+import jwt from 'jsonwebtoken';
 import { type } from 'os';
 import pool from '../config/db-config';
 
@@ -38,14 +39,14 @@ class Admin {
     }
     const account = `SELECT * FROM accounts WHERE accountno ='${accountNumber}'`;
     const { rows } = await pool.query(account);
-    
+
     if (!rows[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Account is not found',
       });
     }
-    
+
     const accountGet = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
 
     if (accountGet.status !== 'ACTIVE') {
@@ -86,7 +87,7 @@ class Admin {
 
   static async deleteAccount(req, res) {
     const accountNumber = parseInt(req.params.accountNo);
-    
+
     if (isNaN(accountNumber)) {
       return res.status(400).json({
         status: 400,
@@ -96,7 +97,7 @@ class Admin {
 
     const accountCheck = `SELECT * FROM accounts WHERE accountno='${accountNumber}';`;
     const { rows } = await pool.query(accountCheck);
-    
+
     if (!rows[0]) {
       return res.status(404).json({
         status: 404,
@@ -110,6 +111,55 @@ class Admin {
     return res.status(200).json({
       status: 200,
       message: `Account ${accountNumber} is successfully DELETED`,
+    });
+  }
+
+  static async createStaffAccount(req, res) {
+    const emailget = 'SELECT * FROM users WHERE email =$1';
+    const { rows: [emailGot] } = await pool.query(emailget, [req.body.email]);
+    if (emailGot) {
+      return res.status(409).json({
+        status: 409,
+        message: 'Email already exists',
+      });
+    }
+
+    const newStaff = {
+      email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: await bcrypt.hash(req.body.password, 10),
+      type: 'staff',
+      is_admin: req.body.is_admin,
+    };
+    
+    
+    const staffInserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';
+    const { rows } = await pool.query(staffInserter,
+      [newStaff.email, newStaff.firstName, newStaff.lastName, newStaff.password, newStaff.type, newStaff.is_admin]);
+
+    const staff = rows.find((obj) => obj.id);
+    
+    const token = jwt.sign({
+      id: staff.id,
+      email: staff.email,
+      firstName: staff.firstName,
+      lastName: staff.lastName,
+      type: staff.type,
+      is_admin: staff.is_admin,
+    }, 'jwtprivatekey');
+
+    return res.status(201).json({
+      status: 201,
+      data: {
+        token,
+        id: staff.id,
+        firstName: staff.firstName,
+        lastName: staff.lastName,
+        email: staff.email,
+        type: 'staff',
+        is_admin: staff.is_admin,
+      },
     });
   }
 }
