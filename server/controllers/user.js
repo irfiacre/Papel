@@ -183,7 +183,7 @@ class UserSign {
     if (!rows[0]) {
       return res.status(404).json({
         status: 404,
-        error: 'NOT FOUND',
+        error: 'PAGE NOT FOUND',
       });
     }
     const accountFinder = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
