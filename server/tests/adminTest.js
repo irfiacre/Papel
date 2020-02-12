@@ -77,3 +77,39 @@ describe('Test For admin to activate or deactivate', () => {
       });
   });
 });
+
+
+describe('Test For admin to DELETE account', () => {
+  it('should DELETE account', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .delete('/accounts/3')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('should NOT DELETE account, account number must be an integer', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .delete('/accounts/kjkfd')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
+  it('should NOT DELETE account,account number not found', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .delete('/accounts/128')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+});

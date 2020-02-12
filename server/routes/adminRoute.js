@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/accounts', [authorisation, adminCheck], admin.viewBankAccounts);
 router.patch('/account/:accountNo', [authorisation, adminCheck], admin.updateAccount);
+router.delete('/accounts/:accountNo', [authorisation, adminCheck], admin.deleteAccount);
 
 
 export default router;
