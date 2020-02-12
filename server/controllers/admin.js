@@ -38,12 +38,14 @@ class Admin {
     }
     const account = `SELECT * FROM accounts WHERE accountno ='${accountNumber}'`;
     const { rows } = await pool.query(account);
+    
     if (!rows[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Account is not found',
       });
     }
+    
     const accountGet = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
 
     if (accountGet.status !== 'ACTIVE') {
@@ -80,6 +82,35 @@ class Admin {
         },
       });
     }
+  }
+
+  static async deleteAccount(req, res) {
+    const accountNumber = parseInt(req.params.accountNo);
+    
+    if (isNaN(accountNumber)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'The account number must be an integer',
+      });
+    }
+
+    const accountCheck = `SELECT * FROM accounts WHERE accountno='${accountNumber}';`;
+    const { rows } = await pool.query(accountCheck);
+    
+    if (!rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account is not found',
+      });
+    }
+
+    const acQuery = `DELETE FROM accounts WHERE accountno='${accountNumber}';`;
+    await pool.query(acQuery);
+
+    return res.status(200).json({
+      status: 200,
+      message: `Account ${accountNumber} is successfully DELETED`,
+    });
   }
 }
 export default Admin;
