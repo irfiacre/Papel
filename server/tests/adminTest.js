@@ -3,7 +3,7 @@ import { describe, it } from 'mocha';
 import chaiHttp from 'chai-http';
 import app from '../app';
 import 'dotenv';
-import dumbData from '../models/testData';
+import dumbData2 from '../models/testData2';
 
 chai.should();
 chai.use(chaiHttp);
@@ -109,6 +109,72 @@ describe('Test For admin to DELETE account', () => {
       .set('Authorization', token)
       .end((err, res) => {
         expect(res).to.have.status(404);
+        done();
+      });
+  });
+});
+
+
+describe('Test For admin to create a new user', () => {
+
+  it('should not Create new user, email already exist', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .post('/auth/create')
+      .set('Authorization', token)
+      .send(dumbData2[0])
+      .end((err, res) => {
+        console.log(res.body); 
+        expect(res).to.have.status(409);
+        done();
+      });
+  });
+  it('should Create new user', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .post('/auth/create')
+      .set('Authorization', token)
+      .send(dumbData2[1])
+      .end((err, res) => {
+        console.log(res.body); 
+        console.log(res.body); 
+        expect(res).to.have.status(201);
+        done();
+      });
+  });
+  it('invalid email', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .post('/auth/create')
+      .set('Authorization', token)
+      .send(dumbData2[2])
+      .end((err, res) => {
+        console.log(res.body); 
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('Invalid email2', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .post('/auth/create')
+      .set('Authorization', token)
+      .send(dumbData2[3])
+      .end((err, res) => {
+        console.log(res.body); 
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('Invalid first name', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .post('/auth/create')
+      .set('Authorization', token)
+      .send(dumbData2[4])
+      .end((err, res) => {
+        console.log(res.body); 
+        expect(res).to.have.status(400);
         done();
       });
   });
