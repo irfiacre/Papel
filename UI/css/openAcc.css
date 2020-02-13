@@ -8,9 +8,6 @@ html{
     line-height: 1.5;
     font-size: 16px;
 }
-.logo{
-    padding: 10px 3%;
-}
 
 .header{
     display: grid;
@@ -30,9 +27,7 @@ td{
     background-color: #276CA6;
     color: white;
 }
-.heading2{
-    margin-top: 10vh;
-}
+
 .heading2 h1{
     color: #1761A0;
     font-family: sans-serif;
@@ -64,15 +59,16 @@ h4{
     border-color: #276CA6;
 }
 .radio{
-    margin: 10px;
+    margin: 5px;
 }
 
 #other{
-    margin: 10px 20px;
+    margin: 10px 10px;
 }
 
 #gender{
     line-height: 1;
+    margin-top: 20px;
 }
 select,option{
     border: 1px solid #276CA6;
@@ -93,6 +89,13 @@ select,option{
     color: black;
 }
 
+.personal{
+    margin: 10px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2,1fr);
+}
+
 
 
 @media(max-width:450px){
@@ -101,5 +104,11 @@ select,option{
         grid-gap: 10px;
         grid-template-columns: repeat(1,1fr);
         padding: 10px 3%;
+    }
+    .personal{
+        margin: 10px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(1,1fr);
     }
 }

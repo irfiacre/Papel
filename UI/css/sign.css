@@ -218,6 +218,9 @@ form span{
     padding-top: 10%;
 }
 
+#agree{
+    margin-right: 20px;
+}
 @media(max-width: 1000px){
     .sign{
         margin-left: 20%;
