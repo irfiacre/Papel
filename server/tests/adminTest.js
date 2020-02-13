@@ -39,6 +39,7 @@ describe('Test For admin to activate or deactivate', () => {
     chai.request(app)
       .patch('/account/3')
       .set('Authorization', token)
+      .send(dumbData2[5])
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -49,6 +50,7 @@ describe('Test For admin to activate or deactivate', () => {
     chai.request(app)
       .patch('/account/2')
       .set('Authorization', token)
+      .send(dumbData2[6])
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -60,6 +62,7 @@ describe('Test For admin to activate or deactivate', () => {
     chai.request(app)
       .patch('/account/1')
       .set('Authorization', token)
+      .send(dumbData2[6])
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
@@ -71,6 +74,7 @@ describe('Test For admin to activate or deactivate', () => {
     chai.request(app)
       .patch('/account/hjhdjfdj')
       .set('Authorization', token)
+      .send(dumbData2[8])
       .end((err, res) => {
         expect(res).to.have.status(400);
         done();

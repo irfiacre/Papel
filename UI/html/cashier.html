@@ -31,8 +31,6 @@
                     </div>
                     
                     <ul class="nav-links">
-                        <li><a href="../../index.html">Home</a></li>
-                        <li><a href="#">Settings</a></li>
                         <li><a href="../../index.html">Log out</a></li>
                         
                     </ul>
@@ -55,60 +53,76 @@
      <div class="all">
      <div class="viewDebit">
         <form action="">
+            <div class="category">
         <p><b>Date:</b><label for="date"><br>
                 <input type="date" name="date" id="date" class="text">
-        </label></p> <br>
+        </label></p>
 
         <p><b>Transaction type:</b><label for="date"><br>
-            <i>Debit</i>
-        </label></p><br>
+            <i class="trans">Debit</i>
+        </label></p>
 
         <p><b>Account No:</b><label for="account"><br>
             <input type="text" name="account" class="text" required  placeholder="Account Number">
-        </label></p><br>
+        </label></p>
+            </div>
 
+            <div class="category">
         <p><b>Cashier ID:</b><label for="cashier"><br>
             <input type="text" name="cashier" class="text" required  placeholder="Cashier ID">
-        </label></p><br>
+        </label></p>
 
         <p><b>Amount:</b><label for="account"><br>
 
             <input type="text" name="account" class="text" required  placeholder="Amount"><br>
-            <select>
-                    <option value="savings">RWF</option>
-                    <option value="personal">USD</option>
-            </select>
-        </label></p><br>
-
-        <input type="button" value="Debit" id="debitBtn">
-      </form>
-     </div>
-     <div class="viewCredit">
-
-            <form action="">
-            <p><b>Date:</b><label for="date"><br>
-                    <input type="date" name="date" id="date" class="text">
-            </label></p> <br>
-    
-            <p><b>Transaction type:</b><label for="date"><br>
-                <i>Credit</i>
-            </label></p><br>
-    
-            <p><b>Account No:</b><label for="account"><br>
-                <input type="text" name="account" class="text" required  placeholder="Account Number">
-            </label></p><br>
-    
-            <p><b>Cashier ID:</b><label for="cashier"><br>
-                <input type="text" name="cashier" class="text" required  placeholder="Cashier ID">
-            </label></p><br>
-    
-            <p><b>Amount:</b><label for="account"><br>
-                <input type="text" name="account" class="text" required  placeholder="Amount"><br>
+            
+        </label></p>
+        <p>
                 <select>
                         <option value="savings">RWF</option>
                         <option value="personal">USD</option>
                 </select>
-            </label></p><br>
+        </p>
+
+        <input type="button" value="Debit" id="debitBtn">
+        </div>
+      </form>
+     </div>
+
+
+     <div class="viewCredit">
+
+            <form action="">
+                <div class="category">
+            <p><b>Date:</b><label for="date"><br>
+                    <input type="date" name="date" id="date" class="text">
+            </label></p> 
+    
+            <p><b>Transaction type:</b><label for="date"><br>
+                <i>Credit</i>
+            </label></p>
+    
+            <p><b>Account No:</b><label for="account"><br>
+                <input type="text" name="account" class="text" required  placeholder="Account Number">
+            </label></p>
+            </div>
+            <div class="category">
+            <p><b>Cashier ID:</b><label for="cashier"><br>
+                <input type="text" name="cashier" class="text" required  placeholder="Cashier ID">
+            </label></p>
+    
+            <p><b>Amount:</b><label for="account"><br>
+                <input type="text" name="account" class="text" required  placeholder="Amount"><br>
+                
+            </label></p>
+            <p>
+                    <select>
+                            <option value="savings">RWF</option>
+                            <option value="personal">USD</option>
+                    </select>
+            </p>
+        
+        </div>
     
             <input type="button" value="Credit" id="creditBtn">
           </form>

@@ -38,21 +38,29 @@ class Admin {
       });
     }
     const account = `SELECT * FROM accounts WHERE accountno ='${accountNumber}'`;
-    const { rows } = await pool.query(account);
+    let {rows: [rows2]} = await pool.query(account);
 
-    if (!rows[0]) {
+    if (!rows2) {
       return res.status(404).json({
         status: 404,
         error: 'Account is not found',
       });
     }
+    
+    const status = {
+      status: req.body.status,
+    };
 
-    const accountGet = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
+    if (status.status !== 'active' && status.status !== 'dormant') {
+      return res.status(400).json({
+        status: 400,
+        message: 'status must either be active or dormat',
+      });
+    }
 
-    if (accountGet.status !== 'ACTIVE') {
-      const updater = ` UPDATE accounts  SET status = 'ACTIVE' WHERE accountno ='${accountNumber}';`;
+      const updater = ` UPDATE accounts  SET status = '${status.status}' WHERE accountno ='${accountNumber}';`;
       await pool.query(updater);
-      const accountQuery = 'SELECT * FROM accounts WHERE status = \'ACTIVE\';';
+      const accountQuery = `SELECT * FROM accounts WHERE status = '${status.status}';`;
       const { rows } = await pool.query(accountQuery);
 
       const accountGet1 = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
@@ -64,25 +72,6 @@ class Admin {
           status: accountGet1.status,
         },
       });
-    }
-
-
-    if (accountGet.status === 'ACTIVE') {
-      const updater2 = ` UPDATE accounts  SET status = 'DORMANT' WHERE accountno ='${accountNumber}';`;
-      await pool.query(updater2);
-
-      const accountQuery2 = 'SELECT * FROM accounts WHERE status = \'DORMANT\';';
-      const { rows } = await pool.query(accountQuery2);
-
-      const accountGet2 = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
-      return res.status(200).json({
-        status: 200,
-        data: {
-          accountNumber: accountGet2.accountno,
-          status: accountGet2.status,
-        },
-      });
-    }
   }
 
   static async deleteAccount(req, res) {

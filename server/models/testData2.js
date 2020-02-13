@@ -35,6 +35,19 @@ const dumData = [
     password: '1qeeeew3e',
     is_admin: false,
   },
+  {
+    status: 'active',
+  },
+  {
+    status: 'dormant',
+  },
+  {
+    status: 'uyuuyuuye87372728',
+  },
+  {
+    status:'',
+  }
+
 
 ];
 

@@ -48,9 +48,10 @@
 
 
     <div class="form">
-        <form action="" method="post">
+        <form action="../html/userAcc.html">
             <div   class="information"  id="personal">
                 <h4>Personal Information</h4>
+                <div class="personal">
                        <p>First Name: <label for="fname">
                         <input type="text" name="fname" class="input"  id="fname" placeholder="First Name" required>
                         </label></p> 
@@ -61,24 +62,28 @@
                         <input type="text" name="id" class="input"  id="id" placeholder="ID/Passport" required>
                         </label></p>
                         <p id="gender">Gender:<label for="email"><br>
-                            <input type="radio" name="single"  class="radio" id="single">Single <br>
-                            <input type="radio" name="married" class="radio" id="married">Married <br>
+                            <input type="radio" name="single"  class="radio" id="single">Single 
+                            <input type="radio" name="married" class="radio" id="married">Married 
                             <span id="other">other<input type="text" name="female" class="input"></span> 
-                        </label></p>       <br>    
+                        </label></p>   
+                    </div>    
             </div> 
 
-            <div   class="information"  id="contact">
+            <div   class="information"  >
                 <h4>Contact information</h4>
+                <div class="personal"> 
                     <p>Email: <label for="email">
                         <input type="text" name="email" class="input"  id="email" placeholder="Email" required>
                         </label></p> 
                     <p>Telephone:<label for="tel">
                         <input type="text" name="tel" class="input"  id="tel" placeholder="Phone number" required>
-                        </label></p><br>
+                        </label></p>
+                    </div>
             </div>
 
-            <div   class="information"  id="contact">
+            <div   class="information"  >
                     <h4>Account Details</h4>
+                    <div class="personal">
                         <p>Account Type: <label for="type">
                                 <select>
                                         <option value="savings">Savings Account</option>
@@ -95,13 +100,16 @@
                                 </select>
                            
                         </label></p>
+                    </div>
                 </div>
                 <br><br>
 
 
-
-               <a href="../html/userAcc.html"><input type="button" class="buttons" value="SUBMIT"></a> 
-                <input type="button" class="buttons" value="CANCEL">
+                <div>
+                   <a href="../html/userAcc.html"><input type="submit" class="buttons" value="SUBMIT"></a> 
+                    <a href="../../index.html"><input type="button" class="buttons" value="CANCEL"></a> 
+                </div>
+               
 
             </form>
     </div>
