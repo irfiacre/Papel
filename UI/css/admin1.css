@@ -24,7 +24,7 @@ nav{
 .actions{
     background-color: rgb(9, 44, 75);
     width: 40%;
-    height: 100vh;
+    height: 80vh;
 }
 .type{
     padding: 3vh 10vh;
@@ -43,13 +43,14 @@ nav{
 }
 
 .all{
-    padding: 10vh 0px;
+    padding: 5vh 0px;
     margin-left: -50%;
 }
 .user{
+    margin-top: 10px;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
 }
 
 .text{
@@ -65,7 +66,7 @@ nav{
     background-color: rgba(231, 243, 255, 0.418);
 }
 select{
-    margin-top: 5px;
+    margin-top: 23px;
     padding: 7px 20px;
     background-color: white;
     border: 1px solid rgb(15, 68, 116);
@@ -122,6 +123,7 @@ select{
 @media(max-width:450px){
     .all{
         margin-left: -70px;
+        margin-top: 15px;
     }
     .actions a{
         font-size: 14px;
@@ -134,7 +136,9 @@ select{
         font-size: 18px;
         margin-top: -7vh;
         margin-bottom: 3vh;
-
+    }
+    .user{
+        grid-template-columns: repeat(1,1fr);
     }
 
 }

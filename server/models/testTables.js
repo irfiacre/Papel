@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users(
 );
 CREATE TABLE IF NOT EXISTS accounts(
   id SERIAL PRIMARY KEY,
-  accountNo SERIAL UNIQUE,
+  accountNo INT UNIQUE,
   createdOn VARCHAR(100) NOT NULL,
   owner VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS transactions(
 );
 
 INSERT INTO users(email,firstname,lastname,password)VALUES('fia@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');
-INSERT INTO accounts(createdon,owner,email,type,status) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current','ACTIVE');
-INSERT INTO accounts(createdon,owner,email,type,status) VALUES(2012-11-20,'RASTA Never','fiaK@mail.com','current','DORMANT');
-INSERT INTO accounts(createdon,owner,email,type) VALUES(2012-11-25,'kagabo divin','kag@mail.com','savings');
+INSERT INTO accounts(createdon,owner,email,type,accountno,status) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current',201231,'ACTIVE');
+INSERT INTO accounts(createdon,owner,email,type,accountno,status) VALUES(2012-11-20,'RASTA Never','fiaK@mail.com','current',201201,'DORMANT');
+INSERT INTO accounts(createdon,owner,email,type,accountno) VALUES(2012-11-25,'kagabo divin','kag@mail.com','savings',201225);
 INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',1,10,0,10);`;
 
 const tables = async () => {

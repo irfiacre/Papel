@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users(
 );
 CREATE TABLE IF NOT EXISTS accounts(
   id SERIAL PRIMARY KEY,
-  accountNo SERIAL UNIQUE,
+  accountNo INT UNIQUE,
   createdOn VARCHAR(100) NOT NULL,
   owner VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS transactions(
   oldbalance FLOAT DEFAULT 0.000,
   newbalance FLOAT DEFAULT 0.000
 );
-INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',1,10,0,10);
+INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',202047,10,0,10);
 INSERT INTO users(email,firstname,lastname,password,is_admin)VALUES('admin@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS',true);
 `;
 

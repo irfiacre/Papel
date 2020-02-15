@@ -60,30 +60,35 @@
          
                             <form action="">
                             <h1>Create An Account</h1>
+                            <div class="user">
                             <p><b>First Name:</b><label for="name"><br>
                                     <input type="text" name="name"  class="text" placeholder="First Name">
-                            </label></p> <br>
+                            </label></p> 
                     
                             <p><b>Last Name:</b><label for="name"><br>
                                 <input type="text" name="name"  class="text" placeholder="Last Name">
-                            </label></p><br>
-                    
+                            </label></p>
+                            </div>
+                            <div class="user">
                             <p><b>Assign Password:</b><label for="account"><br>
                                 <input type="text" name="account" class="text" required  placeholder="Password">
                             </label></p>
+                            
                     
                             <p><b>Confirm Password:</b><label for="cashier"><br>
                                 <input type="text" name="cashier" class="text" required  placeholder="Confirm Password">
-                            </label></p><br>
-                    
+                            </label></p>
+                            </div>
+                            <div class="user">
                             <p><b>Account type:</b><label for="account"><br>
                     
                                 <input type="text" name="account" class="text" required  placeholder="Amount"><br>
-                                <select>
+                            </p>
+                            <p>        <select>
                                         <option value="savings">Administrator</option>
                                         <option value="personal">Staff</option>
                                 </select>
-                            </label></p><br>
+                            </label></p></div> <br>
                     
                             <input type="button" value="Create" id="createBtn">
                           </form>
