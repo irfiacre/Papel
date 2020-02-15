@@ -106,6 +106,17 @@ class UserSign {
       lastName: req.userData.lastName,
       type: req.body.type,
     };
+
+    const accountNumb = () => {
+      let bankNumb = parseInt(account.createdOn);
+      let bankNumb2 = `${bankNumb}`;
+      let id = parseInt((Math.random() * 100) + 1);
+      let id2 = `${id}`;
+      let sum = parseInt(bankNumb2.concat(id2));
+      console.log(typeof (sum));
+      return sum;
+    };
+
     let owner = `${account.firstName} ${account.lastName}`;
     let { email } = req.userData;
 
@@ -117,10 +128,10 @@ class UserSign {
       });
     }
 
-    const inserter2 = 'INSERT INTO accounts(createdon,owner,email,type) VALUES($1,$2,$3,$4) RETURNING *;';
+    const inserter2 = 'INSERT INTO accounts(accountno,createdon,owner,email,type) VALUES($1,$2,$3,$4,$5) RETURNING *;';
 
     const { rows } = await pool.query(inserter2,
-      [account.createdOn, owner, email, account.type]);
+      [accountNumb(), account.createdOn, owner, email, account.type]);
 
     const accountGet = rows.find((obj) => obj.accountno);
 
@@ -171,6 +182,7 @@ class UserSign {
     let { email } = req.userData;
     const accNumber = parseInt(req.params.accountNo);
 
+
     if (isNaN(req.params.accountNo)) {
       return res.status(400).json({
         status: 400,
@@ -180,6 +192,7 @@ class UserSign {
 
     const accounts = `SELECT * FROM accounts WHERE email='${email}' AND accountno = '${accNumber}';`;
     const { rows } = await pool.query(accounts);
+
     if (!rows[0]) {
       return res.status(404).json({
         status: 404,
@@ -248,7 +261,7 @@ class UserSign {
 
   static async specificAccount(req, res) {
     const transId = parseInt(req.params.transactionId);
-    
+
     if (isNaN(transId)) {
       return res.status(400).json({
         status: 400,

@@ -28,11 +28,11 @@ nav{
     height: 80vh;
 }
 .type1{
-    padding: 10vh;
+    padding: 18vh 10vh;
     cursor: pointer;
 }
 .type2{
-    padding: 10vh;
+    padding: 18vh 10vh;
     cursor: pointer;
 }
 
@@ -138,6 +138,19 @@ select{
     grid-gap: 10px;
     grid-template-columns: repeat(3,1fr);
     padding: 10px;
+}
+#date,#date2{
+    cursor: pointer;
+    background-color: #F3F8FD;
+}
+
+.none2{
+    display: none;
+}
+.accountOwner{
+    display: block;
+    padding: 10px 0px;
+    color: #154A79;
 }
 
 

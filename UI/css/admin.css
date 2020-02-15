@@ -4,7 +4,7 @@
 }
 
 html{
-    font-family: 'Lato',sans-serif;
+    font-family: 'Raleway',sans-serif;
     font-size: 16px;
     line-height: 1.5;
 }
@@ -15,6 +15,8 @@ body{
 }
 nav{
     background-color: white;
+    position: fixed;
+    width: 100%;
 }
 .bodyContainer{
     display: grid;
@@ -24,8 +26,9 @@ nav{
 
 
 .actions{
+    position: fixed;
+    margin-top: 12vh;
     background-color: rgb(9, 44, 75);
-    width: 40%;
     height: 120vh;
 }
 .type{
@@ -42,12 +45,16 @@ nav{
 
 
 .all{
-    padding: 10vh 0px;
-    margin-left: -60%;
+    margin-top: 7vh;
+    width: 100%;
+    padding: 100px 0px;
+}
+.userAll{
+    margin-left: 60%;
 }
 .user{
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 50px;
     grid-template-columns: repeat(3,1fr);
 }
 
@@ -81,13 +88,13 @@ h1{
 }
 
 .details{
-    margin-left: -50%;
+    width: 125%;
     padding: 0px 10px;
     text-align: justify;
 }
 .delete1{
     padding: 20px;
-    margin-left: -60%;
+    margin-left: 60%;
 }
 
 .none{
@@ -158,6 +165,7 @@ h1{
 @media(max-width:1000px){
     .type{
         padding: 10vh 10px;
+        font-size: 13px;
     }
     .actions{
         width: 150px;
@@ -181,6 +189,7 @@ h1{
         margin-left: -50px;
     }
     .user{
+        grid-gap: 10px;
         grid-template-columns: repeat(1,1fr);
     }
     .details{
@@ -193,14 +202,16 @@ h1{
     }
 }
 @media(max-width:450px){
-    .all{
-        margin-left: 10px;
+    .userAll{
+        margin-left: 110%;
     }
-    .type{
-        padding: 10vh 10px;
+    nav{
+        position: fixed;
+        z-index: 1;
     }
     .actions{
-        width: 120px;
+        position: fixed;
+        width: 100px;
         height: 200vh;
     }
     .details{
@@ -212,21 +223,17 @@ h1{
         height: 15vh;
     }
     h1{
-        font-size: 18px;
-    }
-    .user{
-        margin-left: -30px;
+        width: 100px;
+        font-size: 16px;
     }
     .content{
         height: 90vh;
-        margin: -10vh 15px;
     }
     .image{
         margin-left: 0px;
     }
     .information{
         margin-left: 0px;
-        padding: 10px;
         line-height: 2;
     }
     

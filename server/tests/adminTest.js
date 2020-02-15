@@ -37,7 +37,7 @@ describe('Test For admin to activate or deactivate', () => {
   it('should Activate account', (done) => {
     const token = process.env.ADMIN_TOKEN;
     chai.request(app)
-      .patch('/account/3')
+      .patch('/account/201225')
       .set('Authorization', token)
       .send(dumbData2[5])
       .end((err, res) => {
@@ -48,7 +48,7 @@ describe('Test For admin to activate or deactivate', () => {
   it('should Activate account also', (done) => {
     const token = process.env.ADMIN_TOKEN;
     chai.request(app)
-      .patch('/account/2')
+      .patch('/account/201201')
       .set('Authorization', token)
       .send(dumbData2[6])
       .end((err, res) => {
@@ -60,7 +60,7 @@ describe('Test For admin to activate or deactivate', () => {
   it('should Deactivate account', (done) => {
     const token = process.env.ADMIN_TOKEN;
     chai.request(app)
-      .patch('/account/1')
+      .patch('/account/201231')
       .set('Authorization', token)
       .send(dumbData2[6])
       .end((err, res) => {
@@ -87,7 +87,7 @@ describe('Test For admin to DELETE account', () => {
   it('should DELETE account', (done) => {
     const token = process.env.ADMIN_TOKEN;
     chai.request(app)
-      .delete('/accounts/3')
+      .delete('/accounts/201201')
       .set('Authorization', token)
       .end((err, res) => {
         expect(res).to.have.status(200);

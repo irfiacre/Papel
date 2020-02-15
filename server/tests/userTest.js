@@ -196,7 +196,7 @@ describe('Test for specific account view', () => {
   it('should show specific account', (done) => {
     const token = process.env.CLIENT_TOKEN;
     chai.request(app)
-      .get('/accounts/1')
+      .get('/accounts/201231')
       .set('Authorization', token)
       .end((err, res) => {
         expect(res).to.have.status(200);
