@@ -113,7 +113,6 @@ class UserSign {
       let id = parseInt((Math.random() * 100) + 1);
       let id2 = `${id}`;
       let sum = parseInt(bankNumb2.concat(id2));
-      console.log(typeof (sum));
       return sum;
     };
 

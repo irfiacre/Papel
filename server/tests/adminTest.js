@@ -19,8 +19,39 @@ describe('Test For admin to view accounts', () => {
         done();
       });
   });
+  it('should show all ACTIVE user bank accounts', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .get('/accounts?status=active')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+  it('should show all DORMANT user bank accounts', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .get('/accounts?status=dormant')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
 
-  it('Forbiden on admins can view all accounts', (done) => {
+  it('should show status must be active or dormant', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .get('/accounts?status=dorm')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
+  it('Forbidden only admins can view all accounts', (done) => {
     const token = process.env.CLIENT_TOKEN;
     chai.request(app)
       .get('/accounts')
