@@ -3,13 +3,46 @@ import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
 import { type } from 'os';
+import url from 'url';
+import querystring from 'querystring';
 import pool from '../config/db-config';
 
 class Admin {
-  static async viewBankAccounts(req, res) {
+  static async viewBankAccounts(req, res) {   
+    if (req.query.status) {
+      
+      let statusk = req.query.status;
+      if (statusk !== 'active' && statusk !== 'dormant') {
+        return res.status(400).json({
+          status: 400,
+          message: 'status must either be active or dormat',
+        });
+      }
+
+      const accountsQuery2 = `SELECT * FROM accounts WHERE status = '${statusk}';`;
+      const { rows } = await pool.query(accountsQuery2);
+
+      const accountsArray3 = [];
+      rows.forEach((account3) => {
+        const accountData3 = {
+          createdOn: account3.createdon,
+          accountNumber: account3.accountno,
+          ownerEmail: account3.email,
+          type: account3.type,
+          status: account3.status,
+          balance: account3.balance,
+        };
+        accountsArray3.push(accountData3);
+      });
+
+      return res.status(200).json({
+        status: 200,
+        accounts: accountsArray3,
+      });
+    }
+
     const accountsQuery = 'SELECT * FROM accounts';
     const { rows } = await pool.query(accountsQuery);
-
     const accountsArray2 = [];
     rows.forEach((account2) => {
       const accountData2 = {
@@ -38,7 +71,7 @@ class Admin {
       });
     }
     const account = `SELECT * FROM accounts WHERE accountno ='${accountNumber}'`;
-    let {rows: [rows2]} = await pool.query(account);
+    let { rows: [rows2] } = await pool.query(account);
 
     if (!rows2) {
       return res.status(404).json({
@@ -46,7 +79,7 @@ class Admin {
         error: 'Account is not found',
       });
     }
-    
+
     const status = {
       status: req.body.status,
     };
@@ -58,20 +91,20 @@ class Admin {
       });
     }
 
-      const updater = ` UPDATE accounts  SET status = '${status.status}' WHERE accountno ='${accountNumber}';`;
-      await pool.query(updater);
-      const accountQuery = `SELECT * FROM accounts WHERE status = '${status.status}';`;
-      const { rows } = await pool.query(accountQuery);
+    const updater = ` UPDATE accounts  SET status = '${status.status}' WHERE accountno ='${accountNumber}';`;
+    await pool.query(updater);
+    const accountQuery = `SELECT * FROM accounts WHERE status = '${status.status}';`;
+    const { rows } = await pool.query(accountQuery);
 
-      const accountGet1 = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
+    const accountGet1 = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
 
-      res.status(200).json({
-        status: 200,
-        data: {
-          accountNumber: accountGet1.accountno,
-          status: accountGet1.status,
-        },
-      });
+    res.status(200).json({
+      status: 200,
+      data: {
+        accountNumber: accountGet1.accountno,
+        status: accountGet1.status,
+      },
+    });
   }
 
   static async deleteAccount(req, res) {
@@ -121,14 +154,14 @@ class Admin {
       type: 'staff',
       is_admin: req.body.is_admin,
     };
-    
-    
+
+
     const staffInserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';
     const { rows } = await pool.query(staffInserter,
       [newStaff.email, newStaff.firstName, newStaff.lastName, newStaff.password, newStaff.type, newStaff.is_admin]);
 
     const staff = rows.find((obj) => obj.id);
-    
+
     const token = jwt.sign({
       id: staff.id,
       email: staff.email,
