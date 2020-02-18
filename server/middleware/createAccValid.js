@@ -10,6 +10,15 @@ const signupValidator = (req, res, next) => {
   };
   const { error } = Joi.validate(req.body, schema);
   if (error) {
+    if (error.details[0].message.replace('/', '').replace(/"/g, '').includes('email')) {
+      return res.status(400).json({
+        status: 400,
+        error: {
+          error: error.details[0].message.replace('/', '').replace(/"/g, ''),
+          example: 'xxx@yyy.zzz',
+        },
+      });
+    }
     return res.status(400).json({
       status: 400,
       error: error.details[0].message.replace('/', '').replace(/"/g, ''),

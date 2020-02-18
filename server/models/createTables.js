@@ -25,13 +25,14 @@ CREATE TABLE IF NOT EXISTS transactions(
   id SERIAL PRIMARY KEY,
   createdon VARCHAR(100) NOT NULL,
   type VARCHAR(10) NOT NULL,
+  cashierid INT NOT NULL,
   accountno INT NOT NULL,
   amount FLOAT NOT NULL,
   oldbalance FLOAT DEFAULT 0.000,
   newbalance FLOAT DEFAULT 0.000
 );
-INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',202047,10,0,10);
-INSERT INTO users(email,firstname,lastname,password,is_admin)VALUES('admin@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS',true);
+INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('admin@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','staff',true);
+INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('cashier@mail.com','Cashier','John','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','cashier',false);
 `;
 
 const tables = async () => {
