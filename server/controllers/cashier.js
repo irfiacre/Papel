@@ -49,11 +49,11 @@ class Cashier {
     const newBalance = oldBalance - transaction.amount;
 
 
-    const updater = `UPDATE accounts SET balance = '${newBalance}' WHERE accountno ='${transaction.accountnNumber}';`;
+    const updater = `UPDATE accounts SET balance = '${newBalance}' WHERE accountno ='${transaction.accountNumber}';`;
     await pool.query(updater);
     const transInserter = 'INSERT INTO transactions(createdon,type,cashierid,accountno,amount,oldbalance,newbalance) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *;';
     const { rows: [transactionGet] } = await pool.query(transInserter,
-      [transaction.date, transaction.type, cashierId, transaction.accountnNumber, transaction.amount, oldBalance, newBalance]);
+      [transaction.date, transaction.type, cashierId, transaction.accountNumber, transaction.amount, oldBalance, newBalance]);
 
 
 
@@ -61,7 +61,7 @@ class Cashier {
       status: 200,
       data: {
         transactionid: transactionGet.id,
-        accountnNumber: transactionGet.accountno,
+        accountNumber: transactionGet.accountno,
         amount: transactionGet.amount,
         cashier: cashierId,
         transactiontype: transactionGet.type,
