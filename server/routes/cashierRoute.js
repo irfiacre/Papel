@@ -6,5 +6,6 @@ import cashierValid from '../middleware/cashierCheck';
 const router = express.Router();
 
 router.post('/transactions/:accountNo/debit', [authorisation, cashierValid.cashierCheck, cashierValid.cashierValid], cashier.debitAccount);
+router.post('/transactions/:accountNo/credit', [authorisation, cashierValid.cashierCheck, cashierValid.cashierValid], cashier.creditAccount);
 
 export default router;
