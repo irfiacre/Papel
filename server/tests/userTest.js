@@ -229,7 +229,7 @@ describe('Test for view of account transactions history', () => {
   it('sould show user account transactions history', (done) => {
     const token = process.env.CLIENT_TOKEN;
     chai.request(app)
-      .get('/accounts/1/transactions')
+      .get('/accounts/201225/transactions')
       .set('Authorization', token)
       .end((err, res) => {
         expect(res).to.have.status(200);

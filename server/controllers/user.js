@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
-import { type } from 'os';
 import pool from '../config/db-config';
 
 class UserSign {

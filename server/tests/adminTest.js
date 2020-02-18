@@ -159,7 +159,6 @@ describe('Test For admin to create a new user', () => {
       .set('Authorization', token)
       .send(dumbData2[0])
       .end((err, res) => {
-        console.log(res.body); 
         expect(res).to.have.status(409);
         done();
       });
@@ -171,8 +170,6 @@ describe('Test For admin to create a new user', () => {
       .set('Authorization', token)
       .send(dumbData2[1])
       .end((err, res) => {
-        console.log(res.body); 
-        console.log(res.body); 
         expect(res).to.have.status(201);
         done();
       });
@@ -183,8 +180,7 @@ describe('Test For admin to create a new user', () => {
       .post('/auth/create')
       .set('Authorization', token)
       .send(dumbData2[2])
-      .end((err, res) => {
-        console.log(res.body); 
+      .end((err, res) => { 
         expect(res).to.have.status(400);
         done();
       });
@@ -196,7 +192,6 @@ describe('Test For admin to create a new user', () => {
       .set('Authorization', token)
       .send(dumbData2[3])
       .end((err, res) => {
-        console.log(res.body); 
         expect(res).to.have.status(400);
         done();
       });
@@ -208,7 +203,6 @@ describe('Test For admin to create a new user', () => {
       .set('Authorization', token)
       .send(dumbData2[4])
       .end((err, res) => {
-        console.log(res.body); 
         expect(res).to.have.status(400);
         done();
       });

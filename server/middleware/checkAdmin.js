@@ -9,6 +9,9 @@ const adminChecking = async (req, res, next) => {
   }
 
   next();
+  console.log(req.userData);
 };
+
+
 
 export default adminChecking;

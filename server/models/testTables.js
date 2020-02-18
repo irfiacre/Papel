@@ -1,7 +1,7 @@
 import pool from '../config/db-config';
 
 const tablesCreator = `
-DROP TABLE IF EXISTS users,accounts CASCADE;
+DROP TABLE IF EXISTS users,accounts,transactions CASCADE;
 CREATE TABLE IF NOT EXISTS users(
   id SERIAL PRIMARY KEY,
   email VARCHAR(35) UNIQUE NOT NULL,
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS transactions(
   id SERIAL PRIMARY KEY,
   createdon VARCHAR(100) NOT NULL,
   type VARCHAR(10) NOT NULL,
+  cashierid INT NOT NULL,
   accountno INT NOT NULL,
   amount FLOAT NOT NULL,
   oldbalance FLOAT DEFAULT 0.000,
@@ -32,10 +33,13 @@ CREATE TABLE IF NOT EXISTS transactions(
 );
 
 INSERT INTO users(email,firstname,lastname,password)VALUES('fia@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');
+INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('cashier@mail.com','Cashier','John','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','cashier',false);
 INSERT INTO accounts(createdon,owner,email,type,accountno,status) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current',201231,'active');
+INSERT INTO accounts(createdon,owner,email,type,accountno,status) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current',200231,'active');
 INSERT INTO accounts(createdon,owner,email,type,accountno,status) VALUES(2012-11-20,'RASTA Never','fiaK@mail.com','current',201201,'dormant');
-INSERT INTO accounts(createdon,owner,email,type,accountno) VALUES(2012-11-25,'kagabo divin','kag@mail.com','savings',201225);
-INSERT INTO transactions(createdon,type,accountno,amount,oldbalance,newbalance) VALUES (20-20-5,'credit',1,10,0,10);`;
+INSERT INTO accounts(createdon,owner,email,type,accountno) VALUES(2012-11-20,'RASTA Never','fiaK@mail.com','current',201901);
+INSERT INTO accounts(createdon,owner,email,type,accountno,balance) VALUES(2012-11-25,'kagabo divin','kag@mail.com','savings',201225,12000.001);
+INSERT INTO transactions(createdon,type,cashierid,accountno,amount,oldbalance,newbalance) VALUES (2020-10-10,'credit',2,201225,2000,12000,10000);`;
 
 const tables = async () => {
   await pool.query(tablesCreator).then(() => {
