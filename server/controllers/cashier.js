@@ -14,7 +14,7 @@ class Cashier {
     const transaction = {
       date: req.body.date,
       type: 'debit',
-      accountnNumber: req.params.accountNo,
+      accountNumber: req.params.accountNo,
       cashier: cashierGet.id,
       amount: parseFloat(req.body.amount),
     };
