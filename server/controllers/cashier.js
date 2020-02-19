@@ -1,14 +1,16 @@
 import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import pool from '../config/db-config';
 
+dotenv.config();
 class Cashier {
   static async debitAccount(req, res) {
     const cashierId = req.userData.id;
 
     const getCashier = `SELECT * FROM users WHERE id= '${cashierId}';`;
     const { rows: [cashierGet] } = await pool.query(getCashier);
-
 
 
     const transaction = {
@@ -54,23 +56,44 @@ class Cashier {
     const { rows: [transactionGet] } = await pool.query(transInserter,
       [transaction.date, transaction.type, cashierId, transaction.accountNumber, transaction.amount, oldBalance, newBalance]);
 
+    let message = 'THANK YOU FOR USING PAPEL';
+    let text = `;
+        Date: ${transactionGet.createdon}
+        Cashier: ${transactionGet.cashierid}
+        Amount: ${transactionGet.amount}
+        Balance: ${transactionGet.newbalance}
+        ${message},
+      `;
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    transporter.sendMail({
+      from: 'papel.kigali@gmail.com',
+      to: `${rows2.email}`,
+      subject: `WITHDRAWAL FROM ${transactionGet.accountno}`,
+      text: `${text}`,
+    });
 
     return res.status(200).json({
       status: 200,
       data: {
+        message: `Transaction email sent to ${rows2.email}`,
         transactionid: transactionGet.id,
         accountNumber: transactionGet.accountno,
         amount: transactionGet.amount,
         cashier: cashierId,
         transactiontype: transactionGet.type,
         accountbalance: transactionGet.newbalance,
-
-
       },
-
-
     });
   }
+
 
   static async creditAccount(req, res) {
     const cashierId = req.userData.id;
@@ -115,20 +138,41 @@ class Cashier {
       [transaction.date, transaction.type, cashierId, transaction.accountNumber, transaction.amount, oldBalance, newBalance]);
 
 
+    let message = 'THANK YOU FOR USING PAPEL';
+    let text = `;
+        Date: ${transactionGet.createdon}
+        Cashier: ${transactionGet.cashierid}
+        Amount: ${transactionGet.amount}
+        Balance: ${transactionGet.newbalance}
+        ${message},
+      `;
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    transporter.sendMail({
+      from: 'papel.kigali@gmail.com',
+      to: `${rows2.email}`,
+      subject: `DEPOSIT FROM ${transactionGet.accountno}`,
+      text: `${text}`,
+    });
+
     return res.status(200).json({
       status: 200,
       data: {
+        message: `Transaction email sent to ${rows2.email}`,
         transactionid: transactionGet.id,
         accountNumber: transactionGet.accountno,
         amount: transactionGet.amount,
         cashier: cashierId,
         transactiontype: transactionGet.type,
         accountbalance: transactionGet.newbalance,
-
-
       },
-
-
     });
   }
 }
