@@ -3,7 +3,7 @@ import { describe, it } from 'mocha';
 import chaiHttp from 'chai-http';
 import app from '../app';
 import 'dotenv';
-import email from '../models/resetData'
+import email from '../models/resetData';
 
 chai.should();
 chai.use(chaiHttp);
@@ -16,7 +16,7 @@ describe('test Reseting password, email', () => {
       .send(email[0])
       .end((err, res) => {
         console.log(res.body);
-        
+
         expect(res).to.have.status(200);
         done();
       });
@@ -43,5 +43,4 @@ describe('test Reseting password, email', () => {
         done();
       });
   });
-
 });
