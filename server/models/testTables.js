@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS transactions(
 );
 
 INSERT INTO users(email,firstname,lastname,password)VALUES('fia@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');
+INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('firaduk@gmail.com','NGABO','Joseph','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','client',false);
 INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('cashier@mail.com','Cashier','John','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','cashier',false);
 INSERT INTO accounts(createdon,owner,email,type,accountno,status) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current',201231,'active');
 INSERT INTO accounts(createdon,owner,email,type,accountno,status) VALUES(2012-12-27,'RASTA Never','fia@mail.com','current',200231,'active');

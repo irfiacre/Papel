@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS transactions(
 );
 INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('admin@mail.com','RASTA','Never','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','staff',true);
 INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('cashier@mail.com','Cashier','John','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','cashier',false);
+INSERT INTO users(email,firstname,lastname,password,type,is_admin)VALUES('firaduk@gmail.com','NGABO','Joseph','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS','client',false);
 `;
 
 const tables = async () => {
