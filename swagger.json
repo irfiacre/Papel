@@ -1,0 +1,690 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "PAPEL",
+      "description": "Papel is a light-weight core banking application that powers banking operations like account creation, customer deposits, and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money.",
+      "contact": {}
+    },
+    "host": "papel-bank.herokuapp.com",
+    
+    "securityDefinitions": {},
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    
+    "paths": {
+      "/auth/signup": {
+        "post": {
+          "description": "",
+          "summary": "Sign up",
+          "tags": [
+            "Sign"
+          ],
+          "operationId": "signUp", 
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "email"
+            },
+            {
+              "name": "firstName",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "lastName",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+              
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format":"password"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "user successfuly created"
+            },
+           "400": {
+              "description": "parameter is required"
+            },
+            "409": {
+              "description": "Email already exist"
+            }
+          }
+        }              
+      },
+
+      "/auth/signin": {
+        "post": {
+          "description": "",
+          "summary": "user login",
+          "tags": [
+            "sign"
+          ],
+          "operationId": "Signin",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+          
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "email"
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "password"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User is successfully logged in"
+            },
+            "404": {
+              "description": "parameter(email or password) not found"
+            }
+          }
+        }
+      },
+      "/accounts": {
+        "post": {
+          "description": "",
+          "summary": "user create account",
+          "tags": [
+            "Client"
+          ],
+          "operationId": "createAccount",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "type": "string",
+              "required":true
+
+            },
+            {
+              "name": "date",
+              "in": "formData",
+              "required": true,
+              "type": "date",
+              "format": "date"
+            },
+            {
+              "name": "type",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "text"
+            }
+          ],
+
+          "responses": {
+            "200": {
+              "description": "account successfuly created"
+            },
+            "400": {
+              "description": "parameter not found or incorrect"
+            },
+            "401": {
+              "description": "Unauthorised: You must login to proceed"
+            }
+          }
+        }
+      },
+
+     "/user/{email}/accounts": {
+        "get": {
+          "description": "",
+          "summary": "User can view all accounts with respect to user's email",
+          "tags": [
+            "Client"
+          ],
+          "operationId": "userAccounts",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "type": "string",
+              "required":true
+
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "All accounts will be displayed"
+            },
+            "400": {
+              "description": "incorrect email"
+            },
+            "401": {
+              "description": "Unauthorised: You must login to proceed"
+            }
+          }
+        }
+      },
+
+      "/accounts/{accountNo}": {
+        "get": {
+          "description": "",
+          "summary": "user specific account",
+          "tags": [
+            "Client"
+          ],
+          "operationId": "specificAccount",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "display specified user account"
+            },
+            "400": {
+              "description": "account number not found"
+            },
+            "401": {
+              "description": "Unauthorised: Authorization not supplied, You must signin to proceed"
+            }
+            
+          }
+        }
+      },
+
+      "/accounts/{accountNo}/transactions": {
+        "get": {
+          "description": "",
+          "summary": "All accounts transactions",
+          "tags": [
+            "Client"
+          ],
+          "operationId": "transaction",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "View all user account's transactions"
+            },
+            "400": {
+              "description": "Account not found"
+            },
+            "401": {
+              "description": "Unauthorised: Authorization not supplied, You must signin to proceed"
+            }
+          }
+        }
+      },
+     
+      "/transactions/{transactionId}": {
+        "get": {
+          "description": "",
+          "summary": "view specific account's transaction",
+          "tags": [
+            "Client"
+          ],
+          "operationId": "transaction",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            }
+          ],
+
+          "responses": {
+            "200": {
+              "description": "display specified transaction"
+            },
+            "404": {
+              "description": "transaction not found"
+            },
+            "401": {
+              "description": "Unauthorised: Authorization not supplied, You must signin to proceed"
+            }
+           }
+          }
+      },
+
+      "/transactions/{accountNo}/debit": {
+        "post": {
+          "description": "",
+          "summary": "cashier debit",
+          "tags": [
+            "Cashier"
+          ],
+          "operationId": "debitAccount",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "type": "string",
+              "required":true
+
+            },
+            {
+              "name": "date",
+              "in": "formData",
+              "required": true,
+              "type": "date",
+              "format": "date"
+            },
+            {
+              "name": "amount",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "number"
+            }
+          ],
+
+          "responses": {
+            "200": {
+              "description": "account successfuly debited transaction email sent to the user's email"
+            },
+            "404": {
+              "description": "account not found or incorrect"
+            },
+            "400": {
+              "description": "account must be active to be used or insufficient account balance"
+            },
+            "403": {
+              "description": "Forbidden only cashier can able to do this"
+            },
+            "401": {
+              "description": "Unauthorised: You must login to proceed"
+            }
+          }
+        }
+      },
+
+      "/transactions/{accountNo}/credit": {
+        "post": {
+          "description": "",
+          "summary": "cashier credit",
+          "tags": [
+            "Cashier"
+          ],
+          "operationId": "creditAccount",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "type": "string",
+              "required":true
+
+            },
+            {
+              "name": "date",
+              "in": "formData",
+              "required": true,
+              "type": "date",
+              "format": "date"
+            },
+            {
+              "name": "amount",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "number"
+            }
+          ],
+
+          "responses": {
+            "200": {
+              "description": "account successfuly credited transaction email sent to the user's email"
+            },
+            "404": {
+              "description": "account not found or incorrect"
+            },
+            "400": {
+              "description": "account must be active to be used or insufficient account balance"
+            },
+            "403": {
+              "description": "Forbidden only cashier can able to do this"
+            },
+            "401": {
+              "description": "Unauthorised: You must login to proceed"
+            }
+          }
+        },
+
+        "/accounts": {
+          "get": {
+            "description": "",
+            "summary": "view all accounts and sort the out",
+            "tags": [
+              "ADMIN"
+            ],
+            "operationId": "transaction",
+            "deprecated": false,
+            "produces": [
+              "application/json"
+            ],
+            "consumes": [
+              "application/x-www-form-urlencoded"
+            ],
+  
+            "parameters": [
+              {
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "type": "string"
+              }
+            ],
+  
+            "responses": {
+              "200": {
+                "description": "display all user accounts in the database"
+              },
+              "403": {
+                "description": "Forbidden only admin can be able to do this"
+              },
+              "401": {
+                "description": "Unauthorised: Authorization not supplied, You must signin to proceed"
+              }
+             }
+            }
+        },
+
+      "/account/{accountNo}": {
+        "patch": {
+          "description": "",
+          "summary": "change account's status",
+          "tags": [
+            "ADMIN"
+          ],
+          "operationId": "accountStatus",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            },
+            {
+                "name": "status",
+                "in": "path",
+                "required": true,
+                "type": "text"
+            }
+
+          ],
+          "responses": {
+            "200": {
+              "description": "account changed to status"
+            },
+            "404": {
+              "description": "account not found"
+            },
+            "401": {
+              "description": "Not authorized, you must sign in"
+            },
+            "403": {
+              "description": "Forbidden only admin can be able to do this"
+            },
+            
+            "400": {
+              "description": "status can only be ACTIVE or DORMANT"
+            }
+          }
+        }
+      },
+      
+      "/accounts/{accountNo}": {
+        "delete": {
+          "description": "",
+          "summary": "delete account number",
+          "tags": [
+            "ADMIN"
+          ],
+          "operationId": "rejected",
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "account successfully deleted"
+            },
+            "404": {
+              "description": "account not found"
+            },
+            "401": {
+              "description": "Not authorized, you must sign in"
+            },
+            "403": {
+              "description": "Forbidden only admin can be able to do this"
+            }
+          }
+        }
+      },
+
+      "/auth/create": {
+        "post": {
+          "description": "",
+          "summary": "create a staff account",
+          "tags": [
+            "ADMIN"
+          ],
+          "operationId": "createStaff", 
+          "deprecated": false,
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "parameters": [
+            
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format": "email"
+            },
+            {
+              "name": "firstName",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "lastName",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+              
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "required": true,
+              "type": "string",
+              "format":"password"
+            },
+            {
+              "name": "is_admin",
+              "in": "formData",
+              "required": true,
+              "type": "boolean"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "staff account successfuly created"
+            },
+           "400": {
+              "description": "parameter is required"
+            },
+            "409": {
+              "description": "Email already exist"
+            }
+          }
+        }              
+      },
+
+  
+    "definitions": {
+        "signin": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "User"
+            }
+        },
+        
+        "signup": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "User"
+            }
+        }
+    
+    },
+
+    "tags": [
+      {
+        "name": "All Endpoints",
+        "description": "all endpoints  return objects in JSON format"
+      }
+    ]
+  }
+}
+}

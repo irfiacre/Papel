@@ -76,10 +76,22 @@ describe('Test For admin to activate or deactivate', () => {
         done();
       });
   });
+  it('account already active', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .patch('/account/201231')
+      .set('Authorization', token)
+      .send(dumbData2[5])
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
   it('should Activate account also', (done) => {
     const token = process.env.ADMIN_TOKEN;
     chai.request(app)
-      .patch('/account/201201')
+      .patch('/account/201901')
       .set('Authorization', token)
       .send(dumbData2[6])
       .end((err, res) => {

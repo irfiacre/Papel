@@ -8,9 +8,8 @@ import querystring from 'querystring';
 import pool from '../config/db-config';
 
 class Admin {
-  static async viewBankAccounts(req, res) {   
+  static async viewBankAccounts(req, res) {
     if (req.query.status) {
-      
       let statusk = req.query.status;
       if (statusk !== 'active' && statusk !== 'dormant') {
         return res.status(400).json({
@@ -83,6 +82,13 @@ class Admin {
     const status = {
       status: req.body.status,
     };
+
+    if (rows2.status === `${status.status}`) {
+      return res.status(400).json({
+        status: 400,
+        error: `${rows2.accountno} Is already ${status.status}`,
+      });
+    }
 
     if (status.status !== 'active' && status.status !== 'dormant') {
       return res.status(400).json({
