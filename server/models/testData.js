@@ -74,7 +74,13 @@ const dumData = [
     date: 2012-12-27,
     type: 'currentuiuiu',
   },
- 
+  {
+    email: 'fa    @mail.   com',
+    password: '1qjeeeew3e',
+  },
+  {
+    email: 'kla@mail.com',
+  },
 
 ];
 

@@ -7,11 +7,7 @@ const adminChecking = async (req, res, next) => {
       error: 'Forbidden: Only administrator is allowed to do this.',
     });
   }
-
   next();
-  console.log(req.userData);
 };
-
-
 
 export default adminChecking;

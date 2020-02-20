@@ -12,11 +12,8 @@ describe('test Reseting password, email', () => {
   it('should send an email to reset the password', (done) => {
     chai.request(app)
       .post('/reset')
-      // .set('mailOption.to', 'firaduk@yahoo.com')
       .send(email[0])
       .end((err, res) => {
-        console.log(res.body);
-
         expect(res).to.have.status(200);
         done();
       });
@@ -27,7 +24,6 @@ describe('test Reseting password, email', () => {
       .post('/reset')
       .send(email[1])
       .end((err, res) => {
-        console.log(res.body);
         expect(res).to.have.status(400);
         done();
       });
@@ -38,7 +34,6 @@ describe('test Reseting password, email', () => {
       .post('/reset')
       .send(email[2])
       .end((err, res) => {
-        console.log(res.body);
         expect(res).to.have.status(400);
         done();
       });

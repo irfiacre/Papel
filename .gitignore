@@ -23,6 +23,12 @@ coverage
 # package-lock.json
  package-lock.json
 
+# eslint
+.eslintrc.js
+
+# licence
+LICENSE
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 

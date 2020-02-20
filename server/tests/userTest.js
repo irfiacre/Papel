@@ -118,6 +118,16 @@ describe('Test sign in', () => {
         done();
       });
   });
+
+  it('password not found', (done) => {
+    chai.request(app)
+      .post('/auth/signin')
+      .send(dumbData[16])
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
 });
 
 
@@ -260,7 +270,6 @@ describe('Test for view of account transactions history', () => {
 });
 
 
-
 describe('Test Account specific transacion', () => {
   it('should show Account specific transacion', (done) => {
     const token = process.env.CLIENT_TOKEN;
@@ -292,6 +301,4 @@ describe('Test Account specific transacion', () => {
         done();
       });
   });
-
-
 });
