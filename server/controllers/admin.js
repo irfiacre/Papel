@@ -171,10 +171,10 @@ class Admin {
 
 
     const staffInserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';
-    const { rows } = await pool.query(staffInserter,
+    const { rows: [staff] } = await pool.query(staffInserter,
       [newStaff.email, newStaff.firstName, newStaff.lastName, newStaff.password, newStaff.type, newStaff.is_admin]);
-
-    const staff = rows.find((obj) => obj.id);
+      console.log(staff);
+      
 
     const token = jwt.sign({
       id: staff.id,
@@ -193,7 +193,7 @@ class Admin {
         firstName: staff.firstName,
         lastName: staff.lastName,
         email: staff.email,
-        type: 'staff',
+        type: staff.type,
         is_admin: staff.is_admin,
       },
     });

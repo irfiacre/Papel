@@ -57,7 +57,7 @@ class Cashier {
       [transaction.date, transaction.type, cashierId, transaction.accountNumber, transaction.amount, oldBalance, newBalance]);
 
     let message = 'THANK YOU FOR USING PAPEL';
-    let text = `;
+    let text = `
         Date: ${transactionGet.createdon}
         Cashier: ${transactionGet.cashierid}
         Amount: ${transactionGet.amount}
@@ -139,7 +139,7 @@ class Cashier {
 
 
     let message = 'THANK YOU FOR USING PAPEL';
-    let text = `;
+    let text = `
         Date: ${transactionGet.createdon}
         Cashier: ${transactionGet.cashierid}
         Amount: ${transactionGet.amount}
