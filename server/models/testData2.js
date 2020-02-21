@@ -5,6 +5,7 @@ const dumData = [
     firstName: 'kazitunga',
     lastName: 'Dativa',
     password: '1q2w3e',
+    type: 'staff',
     is_admin: false,
   },
   {
@@ -12,6 +13,7 @@ const dumData = [
     firstName: 'kaztyty',
     lastName: 'Datiii',
     password: 'uiuiuiu',
+    type: 'cashier',
     is_admin: true,
   },
   {
@@ -19,6 +21,7 @@ const dumData = [
     firstName: 'kaztyytga',
     lastName: 'Datyytyt',
     password: '1qewew3e',
+    type: 'staff',
     is_admin: false,
   },
   {
@@ -26,6 +29,7 @@ const dumData = [
     firstName: 'kazit',
     lastName: 'Detiva',
     password: '1qfdfe3e',
+    type: 'staff',
     is_admin: false,
   },
   {
@@ -33,6 +37,7 @@ const dumData = [
     firstName: 'kazi....',
     lastName: 'D,,tiva',
     password: '1qeeeew3e',
+    type: 'staff',
     is_admin: false,
   },
   {
@@ -46,7 +51,23 @@ const dumData = [
   },
   {
     status:'',
-  }
+  },
+  {
+    email: 'fikla@mail.com',
+    firstName: 'kazitunga',
+    lastName: 'Dativa',
+    password: '1q2w3e',
+    type: 'jdfhjdhfjdf',
+    is_admin: false,
+  },
+  {
+    email: 'fia@mail.com',
+    firstName: 'kazitunga',
+    lastName: 'Dativa',
+    password: '1q2w3e',
+    type: '',
+    is_admin: false,
+  },
 
 
 ];

@@ -1,11 +1,12 @@
 import Joi from 'joi';
 
-const signupValidator = (req, res, next) => {
+const createValidator = (req, res, next) => {
   const schema = {
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
     firstName: Joi.string().alphanum().min(3).max(30).required(),
     lastName: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+    type: Joi.string().alphanum().min(3).max(30).required(),
     is_admin: Joi.boolean(),
   };
   const { error } = Joi.validate(req.body, schema);
@@ -27,4 +28,4 @@ const signupValidator = (req, res, next) => {
   next();
 };
 
-export default signupValidator;
+export default createValidator;

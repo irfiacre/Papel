@@ -219,4 +219,28 @@ describe('Test For admin to create a new user', () => {
         done();
       });
   });
+
+  it('Type must be cashier or staff', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .post('/auth/create')
+      .set('Authorization', token)
+      .send(dumbData2[9])
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+
+  it('Type can not be empty', (done) => {
+    const token = process.env.ADMIN_TOKEN;
+    chai.request(app)
+      .post('/auth/create')
+      .set('Authorization', token)
+      .send(dumbData2[10])
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
 });

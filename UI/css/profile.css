@@ -105,8 +105,15 @@ table td{
     cursor: pointer;
 }
 #balenceBtn:hover{
-    background-color: #2DA7BC;
     color: rgba(255, 255, 255, 0.623);
+}
+
+#totalBalance{
+    color: rgb(50, 184, 50);
+    margin-left: 10px;
+}
+#none{
+    display: none;
 }
 
 
