@@ -157,9 +157,17 @@ class Admin {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       password: await bcrypt.hash(req.body.password, 10),
-      type: 'staff',
+      type: req.body.type,
       is_admin: req.body.is_admin,
     };
+
+    if (newStaff.type !== 'cashier' && newStaff.type !== 'staff') {
+      return res.status(400).json({
+        status: 400,
+        message: 'type must either be cashier or staff',
+      });
+    }
+
 
 
     const staffInserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';

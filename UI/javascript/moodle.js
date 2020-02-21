@@ -18,5 +18,13 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+};
+
+const bBtn = document.getElementById('balenceBtn');
+const balanc = ()=>{
+  const bala = document.getElementById('none');
+
+  bala.setAttribute('id', 'totalBalance');
 }
 
+bBtn.addEventListener('click', balanc);

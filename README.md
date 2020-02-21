@@ -40,6 +40,31 @@ deposit money.
 > - Administrator can delete a user account
 > - Administrator can create  a staff account
 
+### All of the projects endpoints are hosted on [Heroku](https://papel-bank.herokuapp.com)
+> For better testing, please make requests using [Postman](https://www.getpostman.com/) 
+
+### Endpoints
+|HTTP Method|Endpoint |Description|
+|:----------|:---------|:------------|
+|POST |/auth/signup | allows the user to create an account|
+|POST |/auth/signin | allows the user to sign in |
+|POST|/accounts| allows the User to create a bank account
+|PATCH |/account/:accountNo  |allows the admin to activate/dormant a bank account
+|POST  |/transactions/:accountNo/credit| allows the cashier to deposit for a users bank account 
+|POST  |/transactions/:accountNo/debit| allows the cashier to withdraw for a users bank account 
+|GET|/user/:userEmail/accounts|allows a user to his/her own accounts
+|GET |/accounts/:accountNo|allows the user to view his/her own specific bank account
+|GET |/accounts/:accountNo/transactions| allows the user to view all transactions on a specific account
+|GET |/transactions/:transactionId| allows the user to view a specific transaction on a specific account
+|GET |/accounts|allows the admin to view all accounts in the database.
+|GET |/accounts?status=active|allows the admin to view all active accounts in the database.
+|GET |/accounts?status=dormant|allows the admin to view all dormant accounts in the database.
+|POST |/auth/create|allows the admin to create a staff account.
+|DELETE |/accounts/:accountNo|allows the admin to delete a specific bank account
+|POST |/reset|allows the user to reset their password.
+
+*`NB: accountNo : account number`*
+
 ### Prerequisites :
 
 - Clone this project with `https://github.com/irfiacre/Papel.git`
