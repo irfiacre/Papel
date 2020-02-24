@@ -11,7 +11,7 @@ class UserSign {
     if (emailGot) {
       return res.status(409).json({
         status: 409,
-        message: 'Email already exists',
+        error: 'Email already exists',
       });
     }
 
@@ -122,7 +122,7 @@ class UserSign {
     if (account.type !== 'current' && account.type !== 'savings') {
       return res.status(400).json({
         status: 400,
-        message: 'Account must either be savings or current',
+        error: 'Account must either be savings or current',
       });
     }
 

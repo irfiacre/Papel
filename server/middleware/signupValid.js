@@ -16,12 +16,14 @@ const signupValidator = (req, res, next) => {
         error: {
           error: error.details[0].message.replace('/', '').replace(/"/g, ''),
           example: 'xxx@yyy.zzz',
+          path: error.details[0].path[0],
         },
       });
     }
     return res.status(400).json({
       status: 400,
       error: error.details[0].message.replace('/', '').replace(/"/g, ''),
+      path: error.details[0].path[0],
     });
   }
   next();

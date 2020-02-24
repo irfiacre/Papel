@@ -12,6 +12,7 @@ const resetValidator = (req, res, next) => {
         error: error.details[0].message.replace('/', '').replace(/"/g, ''),
         example: 'xxx@yyy.zzz',
       },
+      path: error.details[0].path[0],
     });
   }
   next();
