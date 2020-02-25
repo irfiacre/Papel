@@ -54,7 +54,7 @@ class UserSign {
     if (!emailGot) {
       return res.status(404).json({
         status: 404,
-        message: 'Email not Found',
+        error: 'Email not Found',
       });
     }
 
