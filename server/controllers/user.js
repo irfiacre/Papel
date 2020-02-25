@@ -2,7 +2,10 @@ import bcrypt from 'bcrypt';
 import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import pool from '../config/db-config';
+
+dotenv.config();
 
 class UserSign {
   static async signup(req, res) {
@@ -86,8 +89,7 @@ class UserSign {
       lastName: user.lastName,
       type: passwordGot.type,
       is_admin: passwordGot.is_admin,
-    }, 'jwtprivatekey');
-
+    }, process.env.JWT_KEY);
 
     res.status(200).json({
       status: 200,
