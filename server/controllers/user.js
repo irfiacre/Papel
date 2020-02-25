@@ -99,6 +99,8 @@ class UserSign {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        type: passwordGot.type,
+        is_admin: passwordGot.is_admin,
       },
     });
   }
