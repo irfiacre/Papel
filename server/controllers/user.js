@@ -2,24 +2,28 @@ import bcrypt from 'bcrypt';
 import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import pool from '../config/db-config';
+
+dotenv.config();
 
 class UserSign {
   static async signup(req, res) {
     const emailget = 'SELECT * FROM users WHERE email =$1';
-    const { rows: [emailGot] } = await pool.query(emailget, [req.body.email]);
+    const { rows: [emailGot] } = await pool.query(emailget, [req.body.emails]);
     if (emailGot) {
       return res.status(409).json({
         status: 409,
-        message: 'Email already exists',
+        error: 'Email already exists',
+        path: 'email',
       });
     }
 
     const user = {
-      email: req.body.email,
+      email: req.body.emails,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      password: await bcrypt.hash(req.body.password, 10),
+      password: await bcrypt.hash(req.body.passwords, 10),
       type: 'client',
       is_admin: false,
     };
@@ -54,7 +58,8 @@ class UserSign {
     if (!emailGot) {
       return res.status(404).json({
         status: 404,
-        message: 'Email not Found',
+        error: 'Email not Found',
+        path: 'email',
       });
     }
 
@@ -66,6 +71,7 @@ class UserSign {
       return res.status(400).json({
         status: 400,
         error: 'Invalid Password',
+        path: 'password',
       });
     }
 
@@ -83,8 +89,7 @@ class UserSign {
       lastName: user.lastName,
       type: passwordGot.type,
       is_admin: passwordGot.is_admin,
-    }, 'jwtprivatekey');
-
+    }, process.env.JWT_KEY);
 
     res.status(200).json({
       status: 200,
@@ -94,6 +99,8 @@ class UserSign {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        type: passwordGot.type,
+        is_admin: passwordGot.is_admin,
       },
     });
   }
@@ -122,7 +129,8 @@ class UserSign {
     if (account.type !== 'current' && account.type !== 'savings') {
       return res.status(400).json({
         status: 400,
-        message: 'Account must either be savings or current',
+        error: 'Account must either be savings or current',
+        path: 'type',
       });
     }
 
@@ -153,6 +161,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Email not found in the Database',
+        path: 'email',
       });
     }
     const accounts = `SELECT * FROM accounts WHERE email='${email}'`;
@@ -195,6 +204,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Account number not found',
+        path: 'accountNo',
       });
     }
     const accountFinder = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
@@ -202,6 +212,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Account Number not found.',
+        path: 'accountNo',
       });
     }
 
@@ -225,6 +236,7 @@ class UserSign {
       return res.status(400).json({
         status: 400,
         error: 'The account number must be an integer',
+        path: 'accountNo',
       });
     }
 
@@ -234,6 +246,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Account number is not found',
+        path: 'accountNo',
       });
     }
 
@@ -264,6 +277,7 @@ class UserSign {
       return res.status(400).json({
         status: 400,
         error: 'The Transaction Id must be an integer',
+        path: 'transactionId',
       });
     }
 
@@ -273,6 +287,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Transaction is not found',
+        path: 'transactionId',
       });
     }
 

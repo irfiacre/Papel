@@ -27,12 +27,14 @@ class CashierChecking {
           error: {
             error: 'incorrect date format',
             example: 'please use YYYY-MM-DD',
+            path: error.details[0].path[0],
           },
         });
       }
       return res.status(400).json({
         status: 400,
         error: error.details[0].message.replace('/', '').replace(/"/g, ''),
+        path: error.details[0].path[0],
       });
     }
     next();

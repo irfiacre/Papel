@@ -1,10 +1,15 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+
+dotenv.config();
+
 
 const authorisation = (req, res, next) => {
   try {
     const token = req.headers.authorization;
 
-    const decoded = jwt.verify(token, 'jwtprivatekey');
+    const decoded = jwt.verify(token, process.env.JWT_KEY);
     req.userData = decoded;
     next();
   }catch(error) {
