@@ -1,41 +1,41 @@
 const dumData = [
 
   {
-    email: 'fiat@mail.com',
+    emails: 'fiat@mail.com',
     firstName: 'kazitunga',
     lastName: 'Dativa',
-    password: '1q2w3e',
+    passwords: '1q2w3e',
   },
   {
-    email: 'fia@mail.com',
+    emails: 'fia@mail.com',
     firstName: 'kaztyty',
     lastName: 'Datiii',
-    password: 'uiuiuiu',
+    passwords: 'uiuiuiu',
   },
   {
-    email: '',
+    emails: '',
     firstName: 'kaztyytga',
     lastName: 'Datyytyt',
-    password: '1qewew3e',
+    passwords: '1qewew3e',
   },
   {
-    email: '3434342424',
+    emails: '3434342424',
     firstName: 'kazit',
     lastName: 'Detiva',
-    password: '1qfdfe3e',
+    passwords: '1qfdfe3e',
   },
   {
-    email: 'firk@l.bmk',
+    emails: 'firk@l.bmk',
     firstName: 'kazi....',
     lastName: 'D,,tiva',
-    password: '1qeeeew3e',
+    passwords: '1qeeeew3e',
   },
   {
     id: '',
-    email: 'firk@l.bmk',
+    emails: 'firk@l.bmk',
     firstName: 'kazik',
     lastName: 'Dotiva',
-    password: '1qjeeeew3e',
+    passwords: '1qjeeeew3e',
   },
   {
     email: 'fia@mail.com',

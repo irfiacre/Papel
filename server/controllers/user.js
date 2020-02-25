@@ -10,7 +10,7 @@ dotenv.config();
 class UserSign {
   static async signup(req, res) {
     const emailget = 'SELECT * FROM users WHERE email =$1';
-    const { rows: [emailGot] } = await pool.query(emailget, [req.body.email]);
+    const { rows: [emailGot] } = await pool.query(emailget, [req.body.emails]);
     if (emailGot) {
       return res.status(409).json({
         status: 409,
@@ -20,10 +20,10 @@ class UserSign {
     }
 
     const user = {
-      email: req.body.email,
+      email: req.body.emails,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      password: await bcrypt.hash(req.body.password, 10),
+      password: await bcrypt.hash(req.body.passwords, 10),
       type: 'client',
       is_admin: false,
     };
