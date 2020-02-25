@@ -12,6 +12,7 @@ class UserSign {
       return res.status(409).json({
         status: 409,
         error: 'Email already exists',
+        path: 'email',
       });
     }
 
@@ -55,6 +56,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Email not Found',
+        path: 'email',
       });
     }
 
@@ -66,6 +68,7 @@ class UserSign {
       return res.status(400).json({
         status: 400,
         error: 'Invalid Password',
+        path: 'password',
       });
     }
 
@@ -123,6 +126,7 @@ class UserSign {
       return res.status(400).json({
         status: 400,
         error: 'Account must either be savings or current',
+        path: 'type',
       });
     }
 
@@ -153,6 +157,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Email not found in the Database',
+        path: 'email',
       });
     }
     const accounts = `SELECT * FROM accounts WHERE email='${email}'`;
@@ -195,6 +200,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Account number not found',
+        path: 'accountNo',
       });
     }
     const accountFinder = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
@@ -202,6 +208,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Account Number not found.',
+        path: 'accountNo',
       });
     }
 
@@ -225,6 +232,7 @@ class UserSign {
       return res.status(400).json({
         status: 400,
         error: 'The account number must be an integer',
+        path: 'accountNo',
       });
     }
 
@@ -234,6 +242,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Account number is not found',
+        path: 'accountNo',
       });
     }
 
@@ -264,6 +273,7 @@ class UserSign {
       return res.status(400).json({
         status: 400,
         error: 'The Transaction Id must be an integer',
+        path: 'transactionId',
       });
     }
 
@@ -273,6 +283,7 @@ class UserSign {
       return res.status(404).json({
         status: 404,
         error: 'Transaction is not found',
+        path: 'transactionId',
       });
     }
 
