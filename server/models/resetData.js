@@ -10,6 +10,15 @@ const mailOption = [
   {
     email: 'firadukyacom',
   },
-]
+  {
+    password: 'user111',
+  },
+  {
+    password: '####    #kjyt',
+  },
+  {
+    password: '',
+  },
+];
 
 export default mailOption;

@@ -39,3 +39,39 @@ describe('test Reseting password, email', () => {
       });
   });
 });
+
+describe('New password', () => {
+  it('should update password', (done) => {
+    const token = process.env.RESET_TOKEN;
+    chai.request(app)
+      .post('/reset/new')
+      .set('Authorization', token)
+      .send(email[3])
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+  it('password must be valid', (done) => {
+    const token = process.env.RESET_TOKEN;
+    chai.request(app)
+      .post('/reset/new')
+      .set('Authorization', token)
+      .send(email[4])
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+  it('password is required', (done) => {
+    const token = process.env.RESET_TOKEN;
+    chai.request(app)
+      .post('/reset/new')
+      .set('Authorization', token)
+      .send(email[4])
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+});

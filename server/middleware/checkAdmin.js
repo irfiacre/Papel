@@ -1,4 +1,3 @@
-import pool from '../config/db-config';
 
 const adminChecking = async (req, res, next) => {
   if (!req.userData.is_admin) {
