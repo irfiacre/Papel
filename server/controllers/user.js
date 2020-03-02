@@ -37,7 +37,7 @@ class UserSign {
     const token = jwt.sign({
       id: userFind.id,
       email: userFind.email,
-    }, 'jwtprivatekey');
+    }, process.env.JWT_KEY);
 
     res.status(201).json({
       status: 201,
@@ -89,7 +89,9 @@ class UserSign {
       lastName: user.lastName,
       type: passwordGot.type,
       is_admin: passwordGot.is_admin,
-    }, process.env.JWT_KEY);
+    }, process.env.JWT_KEY, {
+      expiresIn: '1d',
+    });
 
     res.status(200).json({
       status: 200,
