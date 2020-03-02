@@ -59,7 +59,7 @@ describe('New password', () => {
       .set('Authorization', token)
       .send(email[4])
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -70,7 +70,7 @@ describe('New password', () => {
       .set('Authorization', token)
       .send(email[4])
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(400);
         done();
       });
   });
