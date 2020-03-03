@@ -2,9 +2,7 @@ import bcrypt from 'bcrypt';
 import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
-import { type } from 'os';
-import url from 'url';
-import querystring from 'querystring';
+import validator from 'validator';
 import pool from '../config/db-config';
 
 class Admin {
@@ -152,6 +150,17 @@ class Admin {
       });
     }
 
+    if (!validator.isEmail(req.body.email)) {
+      return res.status(400).json({
+        status: 200,
+        error: {
+          error: 'Incorrect email address format',
+          example: 'xxx@yyy.zzz',
+        },
+        path: 'emails',
+      });
+    }
+
     const newStaff = {
       email: req.body.email,
       firstName: req.body.firstName,
@@ -169,12 +178,10 @@ class Admin {
     }
 
 
-
     const staffInserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';
     const { rows: [staff] } = await pool.query(staffInserter,
       [newStaff.email, newStaff.firstName, newStaff.lastName, newStaff.password, newStaff.type, newStaff.is_admin]);
-      console.log(staff);
-      
+
 
     const token = jwt.sign({
       id: staff.id,

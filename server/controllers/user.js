@@ -3,6 +3,7 @@ import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import validator from 'validator';
 import pool from '../config/db-config';
 
 dotenv.config();
@@ -15,10 +16,19 @@ class UserSign {
       return res.status(409).json({
         status: 409,
         error: 'Email already exists',
-        path: 'email',
+        path: 'emails',
       });
     }
-
+    if (!validator.isEmail(req.body.emails)) {
+      return res.status(400).json({
+        status: 200,
+        error: {
+          error: 'Incorrect email address format',
+          example: 'xxx@yyy.zzz',
+        },
+        path: 'emails',
+      });
+    }
     const user = {
       email: req.body.emails,
       firstName: req.body.firstName,
