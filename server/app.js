@@ -23,7 +23,7 @@ app.use('/', reseting);
 
 app.use((req, res) => res.status(400).json({
   status: 400,
-  error: 'PAGE NOT FOUND',
+  error: ' PAGE NOT FOUND ',
 
 }));
 
