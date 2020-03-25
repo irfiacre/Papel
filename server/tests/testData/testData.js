@@ -7,10 +7,10 @@ const dumData = [
     passwords: '1q2w3e',
   },
   {
-    emails: 'fia@mail.com',
-    firstName: 'kaztyty',
-    lastName: 'Datiii',
-    passwords: 'uiuiuiu',
+    emails: 'firaduk@gmail.com',
+    firstName: 'NGABO',
+    lastName: 'Joseph',
+    passwords: 'user123',
   },
   {
     emails: '',
@@ -38,15 +38,15 @@ const dumData = [
     passwords: '1qjeeeew3e',
   },
   {
-    email: 'fia@mail.com',
+    email: 'firaduk@gmail.com',
     password: 'user123',
   },
   {
-    email: 'fia@mail.com',
+    email: 'firaduk@gmail.com',
     password: '1qjeeeew3e',
   },
   {
-    email: 'fa@mail.com',
+    email: 'fxxa@mail.com',
     password: '1qjeeeew3e',
   },
   {

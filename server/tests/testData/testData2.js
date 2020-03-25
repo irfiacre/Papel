@@ -1,7 +1,7 @@
 const dumData = [
 
   {
-    email: 'fia@mail.com',
+    email: 'admin@mail.com',
     firstName: 'kazitunga',
     lastName: 'Dativa',
     password: '1q2w3e',

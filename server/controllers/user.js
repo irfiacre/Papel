@@ -4,21 +4,23 @@ import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import validator from 'validator';
-import pool from '../config/db-config';
+import userQueries from '../helpers/users.queries';
+import accountQueries from '../helpers/accounts.queries';
+import transQueries from '../helpers/transQueries';
 
 dotenv.config();
 
 class UserSign {
   static async signup(req, res) {
-    const emailget = 'SELECT * FROM users WHERE email =$1';
-    const { rows: [emailGot] } = await pool.query(emailget, [req.body.emails]);
-    if (emailGot) {
+    const emailGot = await userQueries.findByProp({ email: req.body.emails });
+    if (emailGot[0]) {
       return res.status(409).json({
         status: 409,
         error: 'Email already exists',
         path: 'emails',
       });
     }
+
     if (!validator.isEmail(req.body.emails)) {
       return res.status(400).json({
         status: 200,
@@ -31,23 +33,22 @@ class UserSign {
     }
     const user = {
       email: req.body.emails,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      firstname: req.body.firstName,
+      lastname: req.body.lastName,
       password: await bcrypt.hash(req.body.passwords, 10),
       type: 'client',
       is_admin: false,
     };
 
-    const inserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';
+    const inserter = await userQueries.insert(user);
 
-    const { rows } = await pool.query(inserter,
-      [user.email, user.firstName, user.lastName, user.password, user.type, user.is_admin]);
-
-    const userFind = rows.find((obj) => obj.id);
+    const userFind = inserter.dataValues;
     const token = jwt.sign({
       id: userFind.id,
       email: userFind.email,
-    }, process.env.JWT_KEY);
+    }, process.env.JWT_KEY, {
+      expiresIn: '4h',
+    });
 
     res.status(201).json({
       status: 201,
@@ -63,20 +64,16 @@ class UserSign {
 
 
   static async signin(req, res) {
-    const emailget = 'SELECT * FROM users WHERE email =$1';
-    const { rows: [emailGot] } = await pool.query(emailget, [req.body.email]);
-    if (!emailGot) {
+    const emailGot = await userQueries.findByProp({ email: req.body.email });
+
+    if (!emailGot[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Email not Found',
         path: 'email',
       });
     }
-
-    const getPassword = 'SELECT * FROM users  WHERE email = $1;';
-    const { rows: [passwordGot] } = await pool.query(getPassword, [req.body.email]);
-
-    const password = await bcrypt.compare(req.body.password, passwordGot.password);
+    const password = await bcrypt.compare(req.body.password, emailGot[0].dataValues.password);
     if (!password) {
       return res.status(400).json({
         status: 400,
@@ -86,19 +83,19 @@ class UserSign {
     }
 
     const user = {
-      id: passwordGot.id,
-      firstName: passwordGot.firstname,
-      lastName: passwordGot.lastname,
+      id: emailGot.id,
+      firstName: emailGot.firstname,
+      lastName: emailGot.lastname,
       email: req.body.email,
     };
 
     const token = jwt.sign({
-      id: passwordGot.id,
-      email: passwordGot.email,
+      id: emailGot.id,
+      email: emailGot.email,
       firstName: user.firstName,
       lastName: user.lastName,
-      type: passwordGot.type,
-      is_admin: passwordGot.is_admin,
+      type: emailGot.type,
+      is_admin: emailGot.is_admin,
     }, process.env.JWT_KEY, {
       expiresIn: '1d',
     });
@@ -111,31 +108,30 @@ class UserSign {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        type: passwordGot.type,
-        is_admin: passwordGot.is_admin,
+        type: emailGot.type,
+        is_admin: emailGot.is_admin,
       },
     });
   }
 
   static async createAccount(req, res) {
-    const account = {
-      createdOn: req.body.date,
-      firstName: req.userData.firstName,
-      lastName: req.userData.lastName,
-      type: req.body.type,
-    };
-
     const accountNumb = () => {
-      let bankNumb = parseInt(account.createdOn);
-      let bankNumb2 = `${bankNumb}`;
-      let id = parseInt((Math.random() * 100) + 1);
+      let bankNumb = parseInt(req.body.date);
+      let userId = req.userData.id;
+      let bankNumb2 = `${bankNumb}${userId}`;
+      let id = parseInt((Math.random() * 10000) + 1);
       let id2 = `${id}`;
       let sum = parseInt(bankNumb2.concat(id2));
       return sum;
     };
 
-    let owner = `${account.firstName} ${account.lastName}`;
-    let { email } = req.userData;
+    const account = {
+      accountno: accountNumb(),
+      createdon: req.body.date,
+      owner: `${req.userData.firstName} ${req.userData.lastName}`,
+      email: req.userData.email,
+      type: req.body.type,
+    };
 
 
     if (account.type !== 'current' && account.type !== 'savings') {
@@ -146,12 +142,9 @@ class UserSign {
       });
     }
 
-    const inserter2 = 'INSERT INTO accounts(accountno,createdon,owner,email,type) VALUES($1,$2,$3,$4,$5) RETURNING *;';
+    const inserter2 = await accountQueries.insert(account);
 
-    const { rows } = await pool.query(inserter2,
-      [accountNumb(), account.createdOn, owner, email, account.type]);
-
-    const accountGet = rows.find((obj) => obj.accountno);
+    const accountGet = inserter2.dataValues;
 
     res.status(201).json({
       status: 201,
@@ -176,17 +169,16 @@ class UserSign {
         path: 'email',
       });
     }
-    const accounts = `SELECT * FROM accounts WHERE email='${email}'`;
-    const { rows } = await pool.query(accounts);
+    const accounts = await accountQueries.findByProp({ email: req.params.email });
 
     const accountsArray = [];
-    rows.forEach((account) => {
+    accounts.forEach((account) => {
       const accountData = {
-        createdOn: account.createdon,
-        accountNumber: account.accountno,
-        type: account.type,
-        status: account.status,
-        balance: account.balance,
+        createdOn: account.dataValues.createdon,
+        accountNumber: account.dataValues.accountno,
+        type: account.dataValues.type,
+        status: account.dataValues.status,
+        balance: account.dataValues.balance,
       };
       accountsArray.push(accountData);
     });
@@ -198,10 +190,6 @@ class UserSign {
   }
 
   static async viewAccount(req, res) {
-    let { email } = req.userData;
-    const accNumber = parseInt(req.params.accountNo);
-
-
     if (isNaN(req.params.accountNo)) {
       return res.status(400).json({
         status: 400,
@@ -209,17 +197,19 @@ class UserSign {
       });
     }
 
-    const accounts = `SELECT * FROM accounts WHERE email='${email}' AND accountno = '${accNumber}';`;
-    const { rows } = await pool.query(accounts);
+    const accounts = await accountQueries.findByProp({
+      email: req.userData.email,
+      accountno: req.params.accountNo,
+    });
 
-    if (!rows[0]) {
+    if (!accounts[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Account number not found',
         path: 'accountNo',
       });
     }
-    const accountFinder = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
+    const accountFinder = accounts.find((obj) => obj.accountno === parseInt(req.params.accountNo));
     if (!accountFinder) {
       return res.status(404).json({
         status: 404,
@@ -243,7 +233,6 @@ class UserSign {
   }
 
   static async accountHistory(req, res) {
-    let accountNumb = parseInt(req.params.accountNo);
     if (isNaN(req.params.accountNo)) {
       return res.status(400).json({
         status: 400,
@@ -252,9 +241,9 @@ class UserSign {
       });
     }
 
-    const account = `SELECT * FROM transactions WHERE accountno = '${accountNumb}' `;
-    const { rows } = await pool.query(account);
-    if (!rows[0]) {
+    const account = await transQueries.findByProp({ accoutno: req.params.accountNo });
+
+    if (!account[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Account number is not found',
@@ -263,15 +252,15 @@ class UserSign {
     }
 
     const transactionsArray = [];
-    rows.forEach((transaction) => {
+    account.forEach((transaction) => {
       const transactionData = {
-        transactionId: transaction.id,
-        createdOn: transaction.createdOn,
-        type: transaction.type,
-        accountNumber: transaction.accountno,
-        amount: transaction.amount,
-        oldBalance: transaction.oldbalance,
-        newBalance: transaction.newbalance,
+        transactionId: transaction.dataValues.id,
+        createdOn: transaction.dataValues.createdOn,
+        type: transaction.dataValues.type,
+        accountNumber: transaction.dataValues.accoutno,
+        amount: transaction.dataValues.amount,
+        oldBalance: transaction.dataValues.oldbalance,
+        newBalance: transaction.dataValues.newbalance,
       };
       transactionsArray.push(transactionData);
     });
@@ -293,9 +282,8 @@ class UserSign {
       });
     }
 
-    const transQuery = `SELECT * FROM transactions WHERE id = '${transId}';`;
-    const { rows } = await pool.query(transQuery);
-    if (!rows[0]) {
+    const transQuery = await transQueries.findByProp({ id: req.params.transactionId });
+    if (!transQuery[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Transaction is not found',
@@ -303,7 +291,7 @@ class UserSign {
       });
     }
 
-    const transFind = rows.find((obj) => obj.id === parseInt(req.params.transactionId));
+    const transFind = transQuery.find((obj) => obj.id === parseInt(req.params.transactionId));
 
     const transaction = {
       transactionId: transFind.id,

@@ -3,7 +3,7 @@ import { describe, it } from 'mocha';
 import chaiHttp from 'chai-http';
 import app from '../app';
 import 'dotenv';
-import email from '../models/resetData';
+import email from './testData/resetData';
 
 chai.should();
 chai.use(chaiHttp);

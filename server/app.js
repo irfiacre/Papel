@@ -6,8 +6,7 @@ import swaggerDoc from '../swagger.json';
 import client from './routes/clientRoute';
 import admin from './routes/adminRoute';
 import cashier from './routes/cashierRoute';
-import reseting from './routes/resetRoute'
-
+import reseting from './routes/resetRoute';
 
 const app = express();
 

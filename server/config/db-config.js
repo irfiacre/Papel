@@ -1,15 +1,49 @@
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
+
+config();
+
+module.exports = {
+  development: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+    logging: false,
+  },
+  test: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+    logging: false,
+  },
+  production: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+    logging: false,
+  },
+};
+// export const test = {
+//   url: process.env.DATABASE_URL,
+//   dialect: 'postgres',
+//   logging: false,
+// };
+// export const production = {
+//   url: process.env.DATABASE_URL,
+//   dialect: 'postgres',
+//   logging: false,
+// };
 
 
-dotenv.config();
 
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
-
-pool.on('connect', () => {
-});
-
-export default pool;
+// export const development = {
+//   url: process.env.DATABASE_URL,
+//   dialect: 'postgres',
+//   logging: false,
+// };
+// export const test = {
+//   url: process.env.DATABASE_URL,
+//   dialect: 'postgres',
+//   logging: false,
+// };
+// export const production = {
+//   url: process.env.DATABASE_URL,
+//   dialect: 'postgres',
+//   logging: false,
+// };
