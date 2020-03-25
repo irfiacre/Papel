@@ -1,15 +1,21 @@
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 
+config();
 
-dotenv.config();
-
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
-
-pool.on('connect', () => {
-});
-
-export default pool;
+module.exports = {
+  development: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+    logging: false,
+  },
+  test: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+    logging: false,
+  },
+  production: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres',
+    logging: false,
+  },
+};

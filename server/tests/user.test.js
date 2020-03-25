@@ -3,7 +3,7 @@ import { describe, it } from 'mocha';
 import chaiHttp from 'chai-http';
 import app from '../app';
 import 'dotenv';
-import dumbData from '../models/testData';
+import dumbData from './testData/testData';
 
 chai.should();
 chai.use(chaiHttp);
@@ -100,7 +100,7 @@ describe('Test sign in', () => {
         done();
       });
   });
-  it('email is empty', (done) => {
+  it('email is not allowed to be empty', (done) => {
     chai.request(app)
       .post('/auth/signin')
       .send(dumbData[9])
@@ -109,7 +109,7 @@ describe('Test sign in', () => {
         done();
       });
   });
-  it('password is empty', (done) => {
+  it('password is not allowed to be empty', (done) => {
     chai.request(app)
       .post('/auth/signin')
       .send(dumbData[9])
@@ -129,7 +129,6 @@ describe('Test sign in', () => {
       });
   });
 });
-
 
 describe('Test User create account', () => {
   it('should create new account', (done) => {
@@ -206,11 +205,17 @@ describe('Test for specific account view', () => {
   it('should show specific account', (done) => {
     const token = process.env.CLIENT_TOKEN;
     chai.request(app)
-      .get('/accounts/201231')
+      .post('/accounts')
       .set('Authorization', token)
+      .send(dumbData[11])
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        done();
+        chai.request(app)
+          .get(`/accounts/${res.body.data.accountNumber}`)
+          .set('Authorization', token)
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            done();
+          });
       });
   });
   it('specific account not found', (done) => {

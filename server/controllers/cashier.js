@@ -2,37 +2,25 @@ import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import pool from '../config/db-config';
+import accountQueries from '../helpers/accounts.queries';
+import transQueries from '../helpers/transQueries';
 
 dotenv.config();
 class Cashier {
   static async debitAccount(req, res) {
     const cashierId = req.userData.id;
+    const amountCash = parseFloat(req.body.amount);
+    const accountGet = await accountQueries.findByProp({ accountno: req.params.accountNo });
 
-    const getCashier = `SELECT * FROM users WHERE id= '${cashierId}';`;
-    const { rows: [cashierGet] } = await pool.query(getCashier);
-
-
-    const transaction = {
-      date: req.body.date,
-      type: 'debit',
-      accountNumber: req.params.accountNo,
-      cashier: cashierGet.id,
-      amount: parseFloat(req.body.amount),
-    };
-
-
-    const accountGet = `SELECT * FROM accounts WHERE accountno = '${req.params.accountNo}';`;
-    const { rows: [rows2] } = await pool.query(accountGet);
-    if (!rows2) {
+    if (!accountGet[0]) {
       return res.status(404).json({
         status: 404,
         error: 'account number not found',
       });
     }
+    const rows2 = accountGet[0].dataValues;
 
-
-    if (rows2.status === 'DRAFT' || rows2.status === 'dormant') {
+    if (rows2.status === 'pending' || rows2.status === 'dormant') {
       return res.status(400).json({
         status: 400,
         error: 'account must be ACTIVATED to be used.',
@@ -41,20 +29,29 @@ class Cashier {
 
     const oldBalance = rows2.balance;
 
-    if (oldBalance === 0 || oldBalance <= transaction.amount) {
+    if (oldBalance === 0 || oldBalance <= amountCash) {
       return res.status(400).json({
         status: 400,
         error: 'INSUFFICIENT BALANCE ON THE ACCOUNT',
       });
     }
-    const newBalance = oldBalance - transaction.amount;
+    const newBalance = oldBalance - amountCash;
+
+    const transaction = {
+      createdon: req.body.date,
+      type: 'debit',
+      cashierid: req.userData.id,
+      accoutno: req.params.accountNo,
+      amount: amountCash,
+      oldbalance: oldBalance,
+      newbalance: newBalance,
+    };
+
+    await accountQueries.updateAtt({ balance: newBalance }, { accountno: req.params.accountNo });
 
 
-    const updater = `UPDATE accounts SET balance = '${newBalance}' WHERE accountno ='${transaction.accountNumber}';`;
-    await pool.query(updater);
-    const transInserter = 'INSERT INTO transactions(createdon,type,cashierid,accountno,amount,oldbalance,newbalance) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *;';
-    const { rows: [transactionGet] } = await pool.query(transInserter,
-      [transaction.date, transaction.type, cashierId, transaction.accountNumber, transaction.amount, oldBalance, newBalance]);
+    const transInserter = await transQueries.insert(transaction);
+    const transactionGet = transInserter.dataValues;
 
     let message = 'THANK YOU FOR USING PAPEL';
     let text = `
@@ -97,30 +94,19 @@ class Cashier {
 
   static async creditAccount(req, res) {
     const cashierId = req.userData.id;
+    const amountCash = parseFloat(req.body.amount);
+    const accountGet = await accountQueries.findByProp({ accountno: req.params.accountNo });
 
-    const getCashier = `SELECT * FROM users WHERE id= '${cashierId}';`;
-    const { rows: [cashierGet] } = await pool.query(getCashier);
-
-    const transaction = {
-      date: req.body.date,
-      type: 'credit',
-      accountNumber: req.params.accountNo,
-      cashier: cashierGet.id,
-      amount: parseFloat(req.body.amount),
-    };
-
-
-    const accountGet = `SELECT * FROM accounts WHERE accountno = '${req.params.accountNo}';`;
-    const { rows: [rows2] } = await pool.query(accountGet);
-    if (!rows2) {
+    if (!accountGet[0]) {
       return res.status(404).json({
         status: 404,
         error: 'account number not found',
       });
     }
+    const rows2 = accountGet[0].dataValues;
 
 
-    if (rows2.status === 'DRAFT' || rows2.status === 'dormant') {
+    if (rows2.status === 'pending' || rows2.status === 'dormant') {
       return res.status(400).json({
         status: 400,
         error: 'account must be ACTIVATED to be used.',
@@ -128,15 +114,22 @@ class Cashier {
     }
 
     const oldBalance = rows2.balance;
-    const newBalance = oldBalance + transaction.amount;
+    const newBalance = oldBalance + amountCash;
 
+    const transaction = {
+      createdon: req.body.date,
+      type: 'debit',
+      cashierid: req.userData.id,
+      accoutno: req.params.accountNo,
+      amount: amountCash,
+      oldbalance: oldBalance,
+      newbalance: newBalance,
+    };
 
-    const updater = `UPDATE accounts SET balance = '${newBalance}' WHERE accountno ='${transaction.accountNumber}';`;
-    await pool.query(updater);
-    const transInserter = 'INSERT INTO transactions(createdon,type,cashierid,accountno,amount,oldbalance,newbalance) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *;';
-    const { rows: [transactionGet] } = await pool.query(transInserter,
-      [transaction.date, transaction.type, cashierId, transaction.accountNumber, transaction.amount, oldBalance, newBalance]);
+    await accountQueries.updateAtt({ balance: newBalance }, { accountno: req.params.accountNo });
 
+    const transInserter = await transQueries.insert(transaction);
+    const transactionGet = transInserter.dataValues;
 
     let message = 'THANK YOU FOR USING PAPEL';
     let text = `

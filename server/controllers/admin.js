@@ -3,31 +3,31 @@ import '@babel/plugin-transform-regenerator';
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
-import pool from '../config/db-config';
+import Queries from '../helpers/users.queries';
+import accountQueries from '../helpers/accounts.queries';
 
 class Admin {
   static async viewBankAccounts(req, res) {
     if (req.query.status) {
       let statusk = req.query.status;
-      if (statusk !== 'active' && statusk !== 'dormant') {
+      if (statusk !== 'active' && statusk !== 'dormant' && statusk !== 'pending') {
         return res.status(400).json({
           status: 400,
           message: 'status must either be active or dormat',
         });
       }
 
-      const accountsQuery2 = `SELECT * FROM accounts WHERE status = '${statusk}';`;
-      const { rows } = await pool.query(accountsQuery2);
+      const accountsQuery = await accountQueries.findByProp({ status: statusk });
 
       const accountsArray3 = [];
-      rows.forEach((account3) => {
+      accountsQuery.forEach((account) => {
         const accountData3 = {
-          createdOn: account3.createdon,
-          accountNumber: account3.accountno,
-          ownerEmail: account3.email,
-          type: account3.type,
-          status: account3.status,
-          balance: account3.balance,
+          createdOn: account.createdon,
+          accountNumber: account.accountno,
+          ownerEmail: account.email,
+          type: account.type,
+          status: account.status,
+          balance: account.balance,
         };
         accountsArray3.push(accountData3);
       });
@@ -38,17 +38,17 @@ class Admin {
       });
     }
 
-    const accountsQuery = 'SELECT * FROM accounts';
-    const { rows } = await pool.query(accountsQuery);
+    const accountsQuery2 = await accountQueries.findALL();
+
     const accountsArray2 = [];
-    rows.forEach((account2) => {
+    accountsQuery2.forEach((account) => {
       const accountData2 = {
-        createdOn: account2.createdon,
-        accountNumber: account2.accountno,
-        ownerEmail: account2.email,
-        type: account2.type,
-        status: account2.status,
-        balance: account2.balance,
+        createdOn: account.createdon,
+        accountNumber: account.accountno,
+        ownerEmail: account.email,
+        type: account.type,
+        status: account.status,
+        balance: account.balance,
       };
       accountsArray2.push(accountData2);
     });
@@ -67,46 +67,42 @@ class Admin {
         error: 'The account number must be an integer',
       });
     }
-    const account = `SELECT * FROM accounts WHERE accountno ='${accountNumber}'`;
-    let { rows: [rows2] } = await pool.query(account);
 
-    if (!rows2) {
+    const account = await accountQueries.findByProp({ accountno: accountNumber });
+
+    if (!account[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Account is not found',
       });
     }
 
-    const status = {
-      status: req.body.status,
-    };
+    const rows2 = account[0].dataValues;
 
-    if (rows2.status === `${status.status}`) {
+    const { status } = req.body;
+
+    if (rows2.status === `${status}`) {
       return res.status(400).json({
         status: 400,
-        error: `${rows2.accountno} Is already ${status.status}`,
+        error: `${rows2.accountno} Is already ${status}`,
       });
     }
 
-    if (status.status !== 'active' && status.status !== 'dormant') {
+    if (status !== 'active' && status !== 'dormant') {
       return res.status(400).json({
         status: 400,
         message: 'status must either be active or dormat',
       });
     }
-
-    const updater = ` UPDATE accounts  SET status = '${status.status}' WHERE accountno ='${accountNumber}';`;
-    await pool.query(updater);
-    const accountQuery = `SELECT * FROM accounts WHERE status = '${status.status}';`;
-    const { rows } = await pool.query(accountQuery);
-
-    const accountGet1 = rows.find((obj) => obj.accountno === parseInt(req.params.accountNo));
+    await accountQueries.updateAtt({ status }, { accountno: accountNumber });
+    const account2 = await accountQueries.findByProp({ accountno: accountNumber });
+    const rows3 = account2[0].dataValues;
 
     res.status(200).json({
       status: 200,
       data: {
-        accountNumber: accountGet1.accountno,
-        status: accountGet1.status,
+        accountNumber: rows3.accountno,
+        status: rows3.status,
       },
     });
   }
@@ -121,29 +117,27 @@ class Admin {
       });
     }
 
-    const accountCheck = `SELECT * FROM accounts WHERE accountno='${accountNumber}';`;
-    const { rows } = await pool.query(accountCheck);
+    const account = await accountQueries.findByProp({ accountno: accountNumber });
 
-    if (!rows[0]) {
+    if (!account[0]) {
       return res.status(404).json({
         status: 404,
         error: 'Account is not found',
       });
     }
+    const rows2 = account[0].dataValues;
 
-    const acQuery = `DELETE FROM accounts WHERE accountno='${accountNumber}';`;
-    await pool.query(acQuery);
+    await accountQueries.deleteAtt({ accountno: accountNumber })
 
     return res.status(200).json({
       status: 200,
-      message: `Account ${accountNumber} is successfully DELETED`,
+      message: `Account ${rows2.accountno} is successfully DELETED`,
     });
   }
 
   static async createStaffAccount(req, res) {
-    const emailget = 'SELECT * FROM users WHERE email =$1';
-    const { rows: [emailGot] } = await pool.query(emailget, [req.body.email]);
-    if (emailGot) {
+    const emailGot = await Queries.findByProp({ email: req.body.email });
+    if (emailGot[0]) {
       return res.status(409).json({
         status: 409,
         message: 'Email already exists',
@@ -163,8 +157,8 @@ class Admin {
 
     const newStaff = {
       email: req.body.email,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      firstname: req.body.firstName,
+      lastname: req.body.lastName,
       password: await bcrypt.hash(req.body.password, 10),
       type: req.body.type,
       is_admin: req.body.is_admin,
@@ -177,11 +171,9 @@ class Admin {
       });
     }
 
+    const staffInserter = await Queries.insert(newStaff);
 
-    const staffInserter = 'INSERT INTO users(email,firstname,lastname,password,type,is_admin) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;';
-    const { rows: [staff] } = await pool.query(staffInserter,
-      [newStaff.email, newStaff.firstName, newStaff.lastName, newStaff.password, newStaff.type, newStaff.is_admin]);
-
+    const staff = staffInserter.dataValues;
 
     const token = jwt.sign({
       id: staff.id,

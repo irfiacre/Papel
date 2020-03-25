@@ -2,8 +2,8 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { Hash } from 'crypto';
-import pool from '../config/db-config';
+import userQueries from '../helpers/users.queries';
+import accountQueries from '../helpers/accounts.queries';
 
 dotenv.config();
 
@@ -12,16 +12,17 @@ class Reset {
     const reseter = {
       email: req.body.email,
     };
+    const emailGet = await userQueries.findByProp({ email: reseter.email });
 
-    const emailGet = `SELECT * FROM users WHERE email = '${req.body.email}';`;
-    const { rows: [emailGot] } = await pool.query(emailGet);
-    if (!emailGot) {
+    if (!emailGet[0]) {
       return res.status(400).json({
         status: 400,
         error: 'Email is not found in the database',
         path: 'email',
       });
     }
+
+    const emailGot = emailGet[0].dataValues;
 
     let transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -58,9 +59,7 @@ class Reset {
     const { email } = req.resetData;
     const newPassword = { password: await bcrypt.hash(req.body.password, 11) };
 
-    const passUpdater = `UPDATE users SET password = '${newPassword.password}' WHERE email = '${email}';`;
-    await pool.query(passUpdater);
-
+    await accountQueries.updateAtt({ password: newPassword.password }, { email });
     return res.status(200).json({
       status: 200,
       message: 'Password has updated',
