@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import logger from '../logger';
 
 const signinValidator = (req, res, next) => {
   const schema = {
@@ -11,6 +12,7 @@ const signinValidator = (req, res, next) => {
   const { error } = Joi.validate(req.body, schema);
   if (error) {
     if (error.details[0].message.replace('/', '').replace(/"/g, '').includes('email')) {
+      logger.debug('Incoming email ', { email: req.body.email });
       return res.status(400).json({
         status: 400,
         error: {

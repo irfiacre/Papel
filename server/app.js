@@ -7,9 +7,19 @@ import client from './routes/clientRoute';
 import admin from './routes/adminRoute';
 import cashier from './routes/cashierRoute';
 import reseting from './routes/resetRoute';
+import logger from './logger';
 
 const app = express();
-
+app.all('*', (req, res, next) => {
+  logger.info('Incoming Request', { method: req.method, URL: req.originalUrl });
+  logger.debug('Incoming Request Verbose', {
+    headers: req.headers,
+    params: req.params,
+    query: req.query,
+    body: req.body,
+  });
+  return next();
+});
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 app.use(morgan('dev'));
 app.use(cors());

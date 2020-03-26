@@ -7,6 +7,7 @@ import validator from 'validator';
 import userQueries from '../helpers/users.queries';
 import accountQueries from '../helpers/accounts.queries';
 import transQueries from '../helpers/transQueries';
+import logger from '../logger';
 
 dotenv.config();
 
@@ -67,6 +68,7 @@ class UserSign {
     const emailGot = await userQueries.findByProp({ email: req.body.email });
 
     if (!emailGot[0]) {
+      logger.debug('Incoming email ', { email: req.body.email });
       return res.status(404).json({
         status: 404,
         error: 'Email not Found',
@@ -132,7 +134,7 @@ class UserSign {
       email: req.userData.email,
       type: req.body.type,
     };
-
+    logger.debug('Incoming account create body', { Data: account });
 
     if (account.type !== 'current' && account.type !== 'savings') {
       return res.status(400).json({
