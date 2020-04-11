@@ -8,8 +8,6 @@ creation, customer deposits, and withdrawals. This app is meant to support a sin
 users can signup and create bank accounts online, but must visit the branch to withdraw or
 deposit money.
 
-> An Andela Developer Challenge(ADC)
-
 ### Live Link 
 
 > Papel' User Interface is hosted on the gh-pages  [Papel](https://irfiacre.github.io/Papel/)
@@ -111,10 +109,3 @@ deposit money.
 ### Author 
 
 [IRADUKUNDA Allelua Fiacre](https://github.com/irfiacre)
-
-### Acknowledgments
- 
- >[Andela Rwanda](https://www.andela.com/)
-
-
-
