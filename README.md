@@ -10,7 +10,7 @@ deposit money.
 
 ### Live Link 
 
-> Papel' User Interface is hosted on the gh-pages  [Papel](https://irfiacre.github.io/Papel/)
+> Papel' User Interface is hosted on the gh-pages  [Papel](https://papelproj.netlify.app/)
 
 ##### N.B
 >To sign in as an **Administrator**, use:
